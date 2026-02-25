@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ADM | Gabriel Alves</title>
+  <meta name="theme-color" content="#0E1A1F" />
+  <style>
+    :root{--bg:#070A0D;--bg2:#0B1116;--line:rgba(255,255,255,.08);--text:#ECF2F8;--muted:rgba(236,242,248,.72);--gold:#D6B46C;--gold2:#B48A3D;--shadow:0 18px 60px rgba(0,0,0,.55);--radius:18px;}
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(214,180,108,.10), transparent 55%),
+        radial-gradient(1000px 500px at 80% 10%, rgba(44,122,90,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+    }
+    .wrap{max-width:720px;margin:auto;padding:26px 18px 70px}
+    .panel{border:1px solid var(--line);border-radius:var(--radius);background:rgba(15,23,32,.66);box-shadow:var(--shadow);backdrop-filter:blur(14px);padding:22px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:44px;height:44px;object-fit:contain;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--line);padding:6px}
+    h1{margin:8px 0 0;font-size:22px}
+    .sub{margin:10px 0 0;color:var(--muted);line-height:1.6}
+    label{display:block;font-weight:900;font-size:13px;margin:12px 0 6px}
+    input{width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);outline:none}
+    .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 16px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-weight:900;transition:.25s}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(214,180,108,.35)}
+    .btn.primary{background:linear-gradient(135deg, rgba(214,180,108,.95), rgba(180,138,61,.95));color:#111;border-color:rgba(214,180,108,.35)}
+    .warn{margin-top:10px;color:rgba(255,255,255,.75);font-size:12px}
+    .err{margin-top:10px;color:#ffb4b4;font-size:12px;display:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <div class="top">
+        <div class="brand">
+          <img src="logo.png" alt="Logo">
+          <div>
+            <div style="font-weight:900;letter-spacing:.5px">Área ADM</div>
+            <h1>Entrada rápida</h1>
+          </div>
+        </div>
+        <a class="btn" href="index.html">Voltar</a>
+      </div>
+
+      <p class="sub">Acesso para abrir a <strong>Anamnese</strong> e gerar PDF/arquivo para prontuário.</p>
+
+      <label>Senha (discreta)</label>
+      <input id="pw" type="password" placeholder="Digite a senha" />
+
+      <div class="btns">
+        <button class="btn primary" type="button" onclick="enter()">Entrar</button>
+        <a class="btn" href="anamnese.html">Ir direto (sem senha)</a>
+      </div>
+
+      <div class="err" id="err">Senha incorreta.</div>
+      <div class="warn">Obs.: em HTML puro, isso é apenas “porta discreta”, não segurança real.</div>
+    </div>
+  </div>
+
+  <script>
+    // 🔒 Troque aqui se quiser:
+    const ADMIN_PASS = "gabriel@adm";
+
+    function enter(){
+      const v = document.getElementById("pw").value || "";
+      const err = document.getElementById("err");
+      if(v === ADMIN_PASS){
+        // salva um “token” local para permitir acesso direto
+        localStorage.setItem("adm_ok", "1");
+        window.location.href = "anamnese.html";
+      } else {
+        err.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
