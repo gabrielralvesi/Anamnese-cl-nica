@@ -3,515 +3,499 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anamnese Fono – Bebê (0–6m) | Síndrome de Down + Checklist de Regulação</title>
+  <title>Gabriel Alves | Fonoaudiologia Infantil</title>
+  <meta name="description" content="Clínica premium de fonoaudiologia infantil. Intervenção precoce, TEA, Síndrome de Down, linguagem e motricidade orofacial. CRFa 5-13766."/>
+  <meta name="theme-color" content="#0E1A1F" />
+
   <style>
     :root{
-      --bg:#f7f7f8; --card:#ffffff; --text:#111827; --muted:#6b7280;
-      --line:#e5e7eb; --accent:#2C7A5A; --warn:#b45309; --bad:#b91c1c; --ok:#166534;
+      --bg:#070A0D;
+      --bg2:#0B1116;
+      --card:#0F1720;
+      --line:rgba(255,255,255,.08);
+      --text:#ECF2F8;
+      --muted:rgba(236,242,248,.72);
+      --gold:#D6B46C;
+      --gold2:#B48A3D;
+      --accent:#2C7A5A;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--text)}
-    header{padding:18px 16px; background:linear-gradient(90deg, #ffffff, #f2fbf6); border-bottom:1px solid var(--line)}
-    header h1{margin:0; font-size:18px}
-    header p{margin:6px 0 0; color:var(--muted); font-size:13px}
-    main{max-width:980px; margin:18px auto; padding:0 16px 40px}
-    .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 18px}
-    button{
-      border:1px solid var(--line); background:#fff; padding:10px 12px; border-radius:10px;
-      cursor:pointer; font-weight:600; font-size:14px;
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(214,180,108,.10), transparent 55%),
+        radial-gradient(1000px 500px at 80% 10%, rgba(44,122,90,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      overflow-x:hidden;
     }
-    button.primary{background:var(--accent); color:#fff; border-color:var(--accent)}
-    .card{
-      background:var(--card); border:1px solid var(--line); border-radius:14px;
-      padding:16px; margin:12px 0;
-      box-shadow:0 1px 0 rgba(0,0,0,.03);
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1120px; margin:auto; padding:26px 18px 70px}
+
+    .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px;
+      padding:10px 0 26px;
     }
-    .card h2{margin:0 0 10px; font-size:16px}
-    .grid{display:grid; gap:12px}
-    @media(min-width:860px){ .grid.cols2{grid-template-columns:1fr 1fr} }
-    label{display:block; font-size:13px; font-weight:700; margin-bottom:6px}
-    .hint{font-size:12px; color:var(--muted); margin-top:6px}
-    input, select, textarea{
-      width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff;
-      font-size:14px; outline:none;
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width: 240px;
     }
-    textarea{min-height:90px; resize:vertical}
-    .row{display:flex; gap:10px; flex-wrap:wrap}
-    .row > div{flex:1 1 220px}
-    .checkline{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
-    .chip{
-      display:flex; align-items:center; gap:8px;
-      border:1px solid var(--line); border-radius:999px; padding:8px 10px; background:#fff;
+    .brand img{
+      width:48px; height:48px; object-fit:contain;
+      border-radius:12px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      padding:6px;
+    }
+    .brand .t1{font-weight:900; letter-spacing:.6px}
+    .brand .t2{font-size:12px; color:var(--muted); margin-top:2px}
+
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:13px;
+      transition:.25s;
+      backdrop-filter: blur(10px);
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(214,180,108,.35)}
+    .pill.gold{border-color: rgba(214,180,108,.35); background: rgba(214,180,108,.10)}
+    .pill.green{border-color: rgba(44,122,90,.35); background: rgba(44,122,90,.12)}
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+      margin-top:6px;
+    }
+    @media (max-width: 980px){
+      .hero{grid-template-columns:1fr}
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15,23,32,.66);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(900px 360px at 30% 10%, rgba(214,180,108,.10), transparent 55%),
+                  radial-gradient(900px 360px at 80% 20%, rgba(44,122,90,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .panel > *{position:relative}
+
+    .hero-left{padding:34px 26px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid rgba(214,180,108,.28);
+      background: rgba(214,180,108,.08);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.6px;
+      color: rgba(236,242,248,.92);
+      text-transform: uppercase;
+    }
+    .kdot{
+      width:8px; height:8px; border-radius:50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      box-shadow: 0 0 0 3px rgba(214,180,108,.12);
+    }
+
+    h1{
+      margin:16px 0 10px;
+      font-size:44px;
+      line-height:1.06;
+      letter-spacing:.2px;
+    }
+    @media(max-width:480px){ h1{font-size:36px} }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width: 62ch;
+    }
+
+    .cta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:22px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:13px 16px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-weight:900;
+      transition:.25s;
+      box-shadow: 0 10px 28px rgba(0,0,0,.22);
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(214,180,108,.35)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(214,180,108,.95), rgba(180,138,61,.95));
+      color:#111;
+      border-color: rgba(214,180,108,.35);
+    }
+    .btn.system{
+      background: linear-gradient(135deg, rgba(44,122,90,.95), rgba(30,95,67,.95));
+      border-color: rgba(44,122,90,.35);
+      color:#fff;
+    }
+    .btn.small{padding:10px 12px; border-radius:12px; font-size:13px}
+    .ico{width:16px; height:16px; display:inline-block}
+
+    .meta{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:18px;
+      color:rgba(236,242,248,.75);
       font-size:13px;
     }
-    .chip input{width:auto}
-    .small{font-size:12px; color:var(--muted)}
-    .footer-note{color:var(--muted); font-size:12px; margin-top:10px}
-    .required::after{content:" *"; color:#dc2626}
-    .divider{height:1px; background:var(--line); margin:12px 0}
-
-    .qa{border:1px dashed var(--line); border-radius:12px; padding:12px; background:#fcfcfd}
-    .qa p{margin:0; font-size:13px; color:var(--muted)}
-
-    /* Saída automática */
-    .resultBox{
-      border-radius:12px; padding:12px; border:1px solid var(--line);
-      background:#fff; display:grid; gap:10px;
-    }
-    .badge{
-      display:inline-flex; align-items:center; gap:8px; padding:8px 10px;
-      border-radius:999px; font-weight:800; font-size:13px; width:fit-content;
+    .meta .tag{
       border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      padding:8px 10px;
+      border-radius:999px;
     }
-    .badge.ok{color:var(--ok); border-color:rgba(22,101,52,.3); background:rgba(22,101,52,.06)}
-    .badge.warn{color:var(--warn); border-color:rgba(180,83,9,.3); background:rgba(180,83,9,.06)}
-    .badge.bad{color:var(--bad); border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.06)}
-    .resultTitle{font-weight:900}
-    ul{margin:0; padding-left:18px}
-    @media print{
-      body{background:#fff}
-      header, .toolbar{display:none}
-      .card{box-shadow:none}
-      input, select, textarea{border:1px solid #bfc5ce}
+
+    .hero-right{
+      padding:22px;
+      display:flex; flex-direction:column; gap:14px;
     }
+    .logoBox{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      padding:18px;
+      background: rgba(255,255,255,.02);
+      display:flex; align-items:center; justify-content:center;
+      min-height: 180px;
+      position:relative;
+      overflow:hidden;
+    }
+    .logoBox::after{
+      content:"";
+      position:absolute; inset:-40px;
+      background: radial-gradient(240px 160px at 30% 40%, rgba(214,180,108,.12), transparent 60%),
+                  radial-gradient(260px 160px at 70% 30%, rgba(44,122,90,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .logoBox img{
+      width:min(320px, 92%);
+      height:auto;
+      filter: drop-shadow(0 18px 24px rgba(0,0,0,.35));
+      position:relative;
+    }
+
+    .trust{
+      border:1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255,255,255,.02);
+      padding:18px;
+    }
+    .trust h3{
+      margin:0 0 10px;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+    .trust ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.7}
+    .divider{height:1px; background:var(--line); margin:10px 0 0}
+
+    .section{
+      margin-top:22px;
+      padding:22px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(15,23,32,.45);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media(max-width:980px){ .grid3{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      border-radius: 16px;
+      padding:16px;
+    }
+    .card .title{font-weight:900; margin:0 0 8px}
+    .card p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
+
+    .list{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    @media(max-width:760px){ .list{grid-template-columns:1fr} }
+    .item{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      border-radius: 14px;
+      padding:12px 14px;
+      color: rgba(236,242,248,.84);
+      font-weight:800;
+      font-size:14px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+    }
+    .spark{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      box-shadow: 0 0 0 4px rgba(214,180,108,.10);
+      flex:0 0 auto;
+    }
+
+    footer{
+      margin-top:28px;
+      border-top:1px solid var(--line);
+      padding-top:18px;
+      color: rgba(236,242,248,.62);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+
+    .float{
+      position:fixed; right:16px; bottom:16px;
+      display:flex; flex-direction:column; gap:10px;
+      z-index: 50;
+    }
+    .fab{
+      width:52px; height:52px; border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.45);
+      display:flex; align-items:center; justify-content:center;
+      transition:.2s;
+    }
+    .fab:hover{transform: translateY(-2px); border-color: rgba(214,180,108,.35)}
+    .fab.primary{background: linear-gradient(135deg, rgba(44,122,90,.95), rgba(30,95,67,.95)); border-color: rgba(44,122,90,.35)}
+    .fab.gold{background: linear-gradient(135deg, rgba(214,180,108,.95), rgba(180,138,61,.95)); border-color: rgba(214,180,108,.35)}
+    .fab svg{width:22px; height:22px}
+    .sr{position:absolute; left:-9999px}
+    .anchor{scroll-margin-top:90px}
   </style>
 </head>
-<body>
-  <header>
-    <h1>Anamnese Fono (0–6 meses) | Síndrome de Down + Checklist de Regulação</h1>
-    <p>Com marcação e interpretação automática (conduta sugerida aparece abaixo).</p>
-  </header>
 
-  <main>
-    <div class="toolbar">
-      <button class="primary" type="button" onclick="window.print()">Imprimir / Salvar em PDF</button>
-      <button type="button" onclick="exportJSON()">Exportar respostas (JSON)</button>
-      <button type="button" onclick="clearForm()">Limpar</button>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <img src="logo.png" alt="Logo Gabriel Alves">
+        <div>
+          <div class="t1">Gabriel Alves</div>
+          <div class="t2">Fonoaudiologia Infantil • CRFa 5-13766</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="pill" href="#especialidades">Especialidades</a>
+        <a class="pill" href="#diferenciais">Diferenciais</a>
+        <a class="pill gold" href="#contato">Contato</a>
+        <a class="pill green" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener">Sistema da clínica</a>
+      </nav>
     </div>
 
-    <form id="anamForm">
-      <!-- 1) Identificação -->
-      <section class="card">
-        <h2>1) Identificação</h2>
-        <div class="grid cols2">
-          <div>
-            <label class="required" for="dataAtendimento">Data do atendimento</label>
-            <input id="dataAtendimento" name="dataAtendimento" type="date" required />
-          </div>
-          <div>
-            <label for="profissional">Profissional</label>
-            <input id="profissional" name="profissional" type="text" placeholder="Ex.: Gabriel Alves (CRFa ...)" />
-          </div>
-          <div>
-            <label class="required" for="nomeBebe">Nome do bebê</label>
-            <input id="nomeBebe" name="nomeBebe" type="text" required />
-          </div>
-          <div>
-            <label for="dataNascimento">Data de nascimento</label>
-            <input id="dataNascimento" name="dataNascimento" type="date" />
-          </div>
-          <div>
-            <label for="idadeCronologica">Idade cronológica</label>
-            <input id="idadeCronologica" name="idadeCronologica" type="text" placeholder="Ex.: 3 meses" />
-          </div>
-          <div>
-            <label for="idadeCorrigida">Idade corrigida (se prematuro)</label>
-            <input id="idadeCorrigida" name="idadeCorrigida" type="text" placeholder="Ex.: 2 meses e 1 semana" />
-          </div>
-          <div>
-            <label for="responsavel">Responsável</label>
-            <input id="responsavel" name="responsavel" type="text" placeholder="Nome e grau de parentesco" />
-          </div>
-          <div>
-            <label for="contato">Contato</label>
-            <input id="contato" name="contato" type="text" placeholder="Telefone / WhatsApp" />
-          </div>
+    <section class="hero">
+      <div class="panel hero-left">
+        <div class="kicker"><span class="kdot"></span> atendimento premium e humanizado</div>
+
+        <h1>Comunicação, desenvolvimento e confiança — desde os primeiros meses.</h1>
+
+        <p class="sub">
+          Atendimento especializado em <strong>Fonoaudiologia Infantil</strong> com foco em
+          <strong>intervenção precoce</strong>, linguagem, motricidade orofacial e suporte familiar.
+          Um acompanhamento que transmite segurança, clareza e evolução mensurável.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="#contato">
+            <span class="ico">✦</span> Agendar avaliação
+          </a>
+
+          <a class="btn system" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener">
+            <span class="ico">▣</span> Sistema da clínica
+          </a>
+
+          <a class="btn small" id="btnWhats" href="#" target="_blank" rel="noopener">
+            WhatsApp
+          </a>
+
+          <a class="btn small" id="btnCall" href="#">
+            Ligar
+          </a>
         </div>
 
-        <div class="divider"></div>
-
-        <div class="grid cols2">
-          <div>
-            <label for="encaminhamento">Encaminhamento / queixa principal</label>
-            <textarea id="encaminhamento" name="encaminhamento" placeholder="Ex.: Encaminhado pelo pediatra para intervenção precoce; dúvidas sobre sucção / engasgos / estimulação."></textarea>
-          </div>
-          <div>
-            <label for="objetivoFamilia">Objetivo da família com a terapia</label>
-            <textarea id="objetivoFamilia" name="objetivoFamilia" placeholder="O que a família espera / maiores preocupações."></textarea>
-          </div>
+        <div class="meta">
+          <span class="tag">CRFa 5-13766</span>
+          <span class="tag">Fonoaudiologia Infantil</span>
+          <span class="tag">Intervenção Precoce</span>
+          <span class="tag">Plano e evolução documentados</span>
         </div>
-      </section>
-
-      <!-- ✅ NOVO: CHECKLIST REGULAÇÃO + CONDUTA AUTOMÁTICA -->
-      <section class="card" id="regulacaoCard">
-        <h2>Checklist de Regulação (30s) + Conduta Automática</h2>
-        <p class="small">Marque as opções observadas. A interpretação e o “o que fazer” aparecem logo abaixo.</p>
-
-        <div class="grid cols2">
-          <!-- Estado de alerta -->
-          <div class="qa">
-            <p><strong>1) Estado de alerta</strong></p>
-            <div class="checkline">
-              <label class="chip"><input type="radio" name="reg_alerta" value="Sono profundo"> Sono profundo</label>
-              <label class="chip"><input type="radio" name="reg_alerta" value="Sonolento"> Sonolento</label>
-              <label class="chip"><input type="radio" name="reg_alerta" value="Alerta calmo"> Alerta calmo</label>
-              <label class="chip"><input type="radio" name="reg_alerta" value="Alerta agitado"> Alerta agitado</label>
-              <label class="chip"><input type="radio" name="reg_alerta" value="Choro intenso"> Chorando intenso</label>
-            </div>
-          </div>
-
-          <!-- Organização corporal -->
-          <div class="qa">
-            <p><strong>2) Organização corporal</strong></p>
-            <div class="checkline">
-              <label class="chip"><input type="radio" name="reg_corpo" value="Muito flácido"> Muito flácido (hipotonia acentuada)</label>
-              <label class="chip"><input type="radio" name="reg_corpo" value="Rígido/arqueado"> Rígido / arqueado</label>
-              <label class="chip"><input type="radio" name="reg_corpo" value="Suave/coordenado"> Suave e coordenado</label>
-              <label class="chip"><input type="radio" name="reg_corpo" value="Brusco/desorganizado"> Brusco e desorganizado</label>
-            </div>
-          </div>
-
-          <!-- Contato visual -->
-          <div class="qa">
-            <p><strong>3) Contato visual</strong></p>
-            <div class="checkline">
-              <label class="chip"><input type="radio" name="reg_olhar" value="Sustenta"> Sustenta por alguns segundos</label>
-              <label class="chip"><input type="radio" name="reg_olhar" value="Breve"> Olha rápido e desvia</label>
-              <label class="chip"><input type="radio" name="reg_olhar" value="Evita"> Evita olhar</label>
-              <label class="chip"><input type="radio" name="reg_olhar" value="Procura"> Procura rosto humano</label>
-            </div>
-          </div>
-
-          <!-- Resposta à voz -->
-          <div class="qa">
-            <p><strong>4) Resposta à voz</strong></p>
-            <div class="checkline">
-              <label class="chip"><input type="radio" name="reg_voz" value="Acalma"> Acalma com voz</label>
-              <label class="chip"><input type="radio" name="reg_voz" value="Fica atento"> Fica atento</label>
-              <label class="chip"><input type="radio" name="reg_voz" value="Não reage"> Não reage</label>
-              <label class="chip"><input type="radio" name="reg_voz" value="Irrita mais"> Irrita mais</label>
-            </div>
-          </div>
-
-          <!-- Recuperação -->
-          <div class="qa">
-            <p><strong>5) Recuperação após estímulo leve</strong> <span class="small">(voz suave por 3–5s)</span></p>
-            <div class="checkline">
-              <label class="chip"><input type="radio" name="reg_recupera" value="Mantém"> Mantém organização</label>
-              <label class="chip"><input type="radio" name="reg_recupera" value="Desorganiza"> Se desorganiza facilmente</label>
-              <label class="chip"><input type="radio" name="reg_recupera" value="Chora rápido"> Chora rápido</label>
-              <label class="chip"><input type="radio" name="reg_recupera" value="Recupera sozinho"> Recupera sozinho</label>
-            </div>
-          </div>
-
-          <!-- Observação livre -->
-          <div>
-            <label for="reg_obs">Observações (regulação)</label>
-            <textarea id="reg_obs" name="reg_obs" placeholder="Ex.: cansa rápido, bocejos, soluços, avermelha, arqueia, etc."></textarea>
-            <div class="hint">Dica: bocejos, soluços, caretas, avermelhar e arqueamento podem indicar fadiga/desorganização.</div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- Saída automática -->
-        <div class="resultBox" aria-live="polite">
-          <div id="reg_badge" class="badge warn">Resultado: aguardando marcações</div>
-          <div>
-            <div class="resultTitle">Interpretação</div>
-            <div id="reg_interpretacao" class="small">Marque as opções acima para gerar a interpretação automática.</div>
-          </div>
-          <div>
-            <div class="resultTitle">O que fazer agora (conduta sugerida)</div>
-            <div id="reg_conduta">
-              <ul class="small">
-                <li>Complete o checklist para receber uma conduta alinhada ao estado do bebê.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
-            <div class="resultTitle">Sessão hoje: foco recomendado</div>
-            <div id="reg_foco" class="small">—</div>
-          </div>
-        </div>
-
-        <!-- Campo para arquivar o resultado no prontuário (auto-preenchido) -->
-        <div class="divider"></div>
-        <label for="reg_resultado_salvar">Texto pronto para prontuário (auto)</label>
-        <textarea id="reg_resultado_salvar" name="reg_resultado_salvar" readonly></textarea>
-        <div class="hint">Copie e cole no seu prontuário se precisar (já sai padronizado).</div>
-      </section>
-
-      <!-- 2) Diagnóstico e condições médicas -->
-      <section class="card">
-        <h2>2) Diagnóstico e condições médicas</h2>
-
-        <div class="qa">
-          <p><strong>Pergunta:</strong> Diagnóstico confirmado de Síndrome de Down? Como foi confirmado (cariótipo / clínica)?</p>
-          <label for="diagDown">Resposta</label>
-          <textarea id="diagDown" name="diagDown" placeholder="Descreva brevemente."></textarea>
-        </div>
-
-        <div class="grid cols2" style="margin-top:12px">
-          <div>
-            <label for="cardiopatia">Há cardiopatia congênita?</label>
-            <select id="cardiopatia" name="cardiopatia">
-              <option value="">Selecione</option>
-              <option>Não</option>
-              <option>Sim – em investigação</option>
-              <option>Sim – confirmada</option>
-            </select>
-            <div class="hint">Se sim, informe o tipo / acompanhamento / medicações.</div>
-          </div>
-          <div>
-            <label for="refluxo">Refluxo / vômitos frequentes?</label>
-            <select id="refluxo" name="refluxo">
-              <option value="">Selecione</option>
-              <option>Não</option>
-              <option>Sim – leve</option>
-              <option>Sim – moderado/forte</option>
-            </select>
-          </div>
-          <div>
-            <label for="internacao">Histórico de internações/UTI?</label>
-            <textarea id="internacao" name="internacao" placeholder="Tempo, motivo, uso de O2, intubação, etc."></textarea>
-          </div>
-          <div>
-            <label for="medicacoes">Medicações em uso</label>
-            <textarea id="medicacoes" name="medicacoes" placeholder="Nome, dose, horários (se souber)."></textarea>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <label>Outras condições associadas (marque se houver)</label>
-        <div class="checkline">
-          <label class="chip"><input type="checkbox" name="condicoes" value="Hipotireoidismo/triagem" /> Hipotireoidismo/triagem</label>
-          <label class="chip"><input type="checkbox" name="condicoes" value="Apneia/roncos" /> Apneia/roncos</label>
-          <label class="chip"><input type="checkbox" name="condicoes" value="Alterações respiratórias" /> Alterações respiratórias</label>
-          <label class="chip"><input type="checkbox" name="condicoes" value="Otites recorrentes" /> Otites recorrentes</label>
-          <label class="chip"><input type="checkbox" name="condicoes" value="Convulsões" /> Convulsões</label>
-          <label class="chip"><input type="checkbox" name="condicoes" value="Uso de sonda (passado/atual)" /> Sonda (passado/atual)</label>
-        </div>
-        <div class="hint">Detalhe qualquer item relevante abaixo.</div>
-        <textarea name="condicoesDetalhes" placeholder="Detalhes das condições, exames, especialistas, datas."></textarea>
-      </section>
-
-      <!-- (Mantive o restante como essencial; se quiser, posso reinserir todas as outras seções completas também) -->
-      <section class="card">
-        <h2>Observações finais</h2>
-        <textarea name="observacoesLivre" placeholder="Anotações adicionais gerais."></textarea>
-        <p class="small">Se você quiser, eu recoloco aqui também as seções completas de gestação, alimentação, audição e pré-linguagem como no modelo anterior (é só pedir).</p>
-      </section>
-
-      <div class="footer-note">
-        Modelo interno – Anamnese fono + checklist de regulação (auto-conduta).
       </div>
-    </form>
-  </main>
+
+      <div class="panel hero-right">
+        <div class="logoBox">
+          <img src="logo.png" alt="Gabriel Alves - Fonoaudiologia Infantil">
+        </div>
+
+        <div class="trust">
+          <h3>O que os pais sentem aqui</h3>
+          <ul>
+            <li>clareza do plano terapêutico e metas</li>
+            <li>orientação prática para casa</li>
+            <li>evolução acompanhada e registrada</li>
+            <li>atendimento acolhedor e objetivo</li>
+          </ul>
+          <div class="divider"></div>
+          <p class="small" style="margin:10px 0 0; color:rgba(236,242,248,.68)">
+            Experiência premium = organização, previsibilidade e segurança para a família.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section anchor" id="especialidades">
+      <h2>Especialidades</h2>
+      <div class="list">
+        <div class="item"><span>TEA (Autismo)</span><span class="spark"></span></div>
+        <div class="item"><span>Síndrome de Down</span><span class="spark"></span></div>
+        <div class="item"><span>Atraso de fala e linguagem</span><span class="spark"></span></div>
+        <div class="item"><span>Motricidade orofacial</span><span class="spark"></span></div>
+        <div class="item"><span>Alimentação infantil</span><span class="spark"></span></div>
+        <div class="item"><span>Estimulação precoce</span><span class="spark"></span></div>
+      </div>
+    </section>
+
+    <section class="section anchor" id="diferenciais">
+      <h2>Diferenciais que passam “alto valor”</h2>
+      <div class="grid3">
+        <div class="card">
+          <div class="title">Plano terapêutico claro</div>
+          <p>Metas objetivas, acompanhamento e orientação familiar para que a evolução seja previsível e consistente.</p>
+        </div>
+        <div class="card">
+          <div class="title">Intervenção baseada em evidência</div>
+          <p>Estratégias alinhadas ao desenvolvimento infantil e aos pré-requisitos de comunicação e alimentação.</p>
+        </div>
+        <div class="card">
+          <div class="title">Ambiente acolhedor e organizado</div>
+          <p>Ritmo terapêutico bem conduzido, especialmente em bebês e crianças pequenas, respeitando regulação e engajamento.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section anchor" id="contato">
+      <h2>Contato e agendamento</h2>
+      <div class="grid3">
+        <div class="card">
+          <div class="title">WhatsApp</div>
+          <p>Clique para enviar mensagem e agendar avaliação/triagem.</p>
+          <p style="margin-top:10px">
+            <a class="btn primary" id="btnWhats2" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="title">Telefone</div>
+          <p>Para ligação direta (confirmações / dúvidas rápidas).</p>
+          <p style="margin-top:10px">
+            <a class="btn" id="btnCall2" href="#">Ligar agora</a>
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="title">Sistema da clínica</div>
+          <p>Acesso rápido ao painel do seu sistema.</p>
+          <p style="margin-top:10px">
+            <a class="btn system" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener">Abrir Sistema da clínica</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Gabriel Alves — Fonoaudiologia Infantil • CRFa 5-13766</div>
+      <div>© <span id="year"></span></div>
+    </footer>
+  </div>
+
+  <div class="float">
+    <a class="fab gold" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener" title="Sistema da clínica">
+      <span class="sr">Sistema da clínica</span>
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" stroke="rgba(17,17,17,.95)" stroke-width="1.8" />
+      </svg>
+    </a>
+
+    <a class="fab primary" id="fabWhats" href="#" target="_blank" rel="noopener" title="WhatsApp">
+      <span class="sr">WhatsApp</span>
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M7.5 20.5 4.5 21.5l1-3A9 9 0 1 1 20.2 7.8 9 9 0 0 1 7.5 20.5Z" stroke="rgba(255,255,255,.95)" stroke-width="1.8"/>
+        <path d="M9.2 9.2c.2-.5.4-.5.7-.5h.6c.2 0 .4.1.5.3l.7 1.6c.1.2.1.5-.1.7l-.5.6c-.2.2-.1.5 0 .7.5 1 1.3 1.8 2.3 2.3.2.1.5.1.7 0l.6-.5c.2-.2.5-.2.7-.1l1.6.7c.2.1.3.3.3.5v.6c0 .3 0 .5-.5.7-.6.3-1.9.5-3.8-.4-2.2-1.1-4.2-3.7-4.6-4.9-.4-1.2-.1-2 .2-2.6Z" fill="rgba(255,255,255,.95)"/>
+      </svg>
+    </a>
+  </div>
 
   <script>
-    // --------- UTIL ---------
-    function val(name){
-      const el = document.querySelector(`input[name="${name}"]:checked`);
-      return el ? el.value : "";
-    }
+    // ✅ Seus dados (já configurados)
+    const WHATS_NUMBER = "5567992318379";
+    const PHONE_NUMBER_PRETTY = "(67) 99231-8379";
+    const CITY = "Amambai/MS";
 
-    function setBadge(type, text){
-      const badge = document.getElementById("reg_badge");
-      badge.className = `badge ${type}`;
-      badge.textContent = text;
-    }
+    const msg = encodeURIComponent(
+      "Olá, Gabriel! Gostaria de agendar uma avaliação fonoaudiológica. " +
+      "Nome da criança: ____ | Idade: ____ | Queixa principal: ____ | " +
+      "Disponibilidade de horários: ____."
+    );
 
-    function setHTML(id, html){
-      document.getElementById(id).innerHTML = html;
-    }
+    const waLink = `https://wa.me/${WHATS_NUMBER}?text=${msg}`;
+    const telLink = `tel:${WHATS_NUMBER}`;
 
-    function setText(id, text){
-      document.getElementById(id).textContent = text;
-    }
+    document.getElementById("btnWhats").href = waLink;
+    document.getElementById("btnWhats2").href = waLink;
+    document.getElementById("fabWhats").href = waLink;
 
-    // --------- LÓGICA DE INTERPRETAÇÃO ---------
-    function computeRegulation(){
-      const alerta = val("reg_alerta");
-      const corpo = val("reg_corpo");
-      const olhar = val("reg_olhar");
-      const voz = val("reg_voz");
-      const recupera = val("reg_recupera");
+    document.getElementById("btnCall").href = telLink;
+    document.getElementById("btnCall").textContent = `Ligar (${CITY})`;
 
-      // Se nada marcado ainda
-      if(!alerta && !corpo && !olhar && !voz && !recupera){
-        setBadge("warn", "Resultado: aguardando marcações");
-        setText("reg_interpretacao", "Marque as opções acima para gerar a interpretação automática.");
-        setHTML("reg_conduta", `<ul class="small"><li>Complete o checklist para receber uma conduta alinhada ao estado do bebê.</li></ul>`);
-        setText("reg_foco", "—");
-        document.getElementById("reg_resultado_salvar").value = "";
-        return;
-      }
+    document.getElementById("btnCall2").href = telLink;
+    document.getElementById("btnCall2").textContent = `Ligar: ${PHONE_NUMBER_PRETTY}`;
 
-      // Pontuação (quanto maior, mais regulado)
-      let score = 0;
-
-      // ALERTA
-      if(alerta === "Alerta calmo") score += 3;
-      else if(alerta === "Sonolento") score += 1;
-      else if(alerta === "Alerta agitado") score -= 1;
-      else if(alerta === "Sono profundo") score -= 2;
-      else if(alerta === "Choro intenso") score -= 3;
-
-      // CORPO
-      if(corpo === "Suave/coordenado") score += 2;
-      if(corpo === "Muito flácido") score -= 1;
-      if(corpo === "Rígido/arqueado") score -= 2;
-      if(corpo === "Brusco/desorganizado") score -= 2;
-
-      // OLHAR
-      if(olhar === "Procura") score += 2;
-      if(olhar === "Sustenta") score += 2;
-      if(olhar === "Breve") score += 0;
-      if(olhar === "Evita") score -= 2;
-
-      // VOZ
-      if(voz === "Acalma") score += 2;
-      if(voz === "Fica atento") score += 1;
-      if(voz === "Não reage") score -= 1;
-      if(voz === "Irrita mais") score -= 2;
-
-      // RECUPERAÇÃO
-      if(recupera === "Recupera sozinho") score += 2;
-      if(recupera === "Mantém") score += 2;
-      if(recupera === "Desorganiza") score -= 2;
-      if(recupera === "Chora rápido") score -= 3;
-
-      // Regras de “alerta vermelho” independente do score
-      const redFlag = (alerta === "Choro intenso" || alerta === "Sono profundo" || recupera === "Chora rápido");
-
-      let nivel = "warn";
-      let titulo = "🟡 Parcialmente regulado";
-      let interpretacao = "";
-      let conduta = [];
-      let foco = "";
-
-      if(redFlag || score <= -2){
-        nivel = "bad";
-        titulo = "🔴 Desregulado";
-        interpretacao =
-          "O bebê apresenta sinais de desorganização/baixa disponibilidade para aprendizagem no momento. " +
-          "Priorize regulação e segurança antes de qualquer tarefa de comunicação.";
-        conduta = [
-          "<strong>Regular primeiro:</strong> colo com contenção suave e alinhamento (tronco e cabeça), ambiente mais silencioso e luz mais baixa.",
-          "<strong>Voz lenta e grave:</strong> frases curtas e repetitivas; reduzir estímulos simultâneos.",
-          "<strong>Pausas:</strong> sessão mais curta, com intervalos; se persistir choro intenso, encerrar com orientação familiar.",
-          "<strong>Se houver sinais de desconforto:</strong> avaliar fome, refluxo, dor, cansaço; orientar retorno ao pediatra quando necessário."
-        ];
-        foco = "Regulação + orientação familiar (evitar “exigir resposta” do bebê hoje).";
-        setBadge("bad", `Resultado: ${titulo}`);
-      } else if(score >= 6){
-        nivel = "ok";
-        titulo = "🟢 Regulad(o/a)";
-        interpretacao =
-          "O bebê está disponível para engajamento e aprendizagem. Você pode avançar para estímulos comunicativos e, se indicado, observação funcional da alimentação.";
-        conduta = [
-          "<strong>Comunicação:</strong> face a face, turn-taking (eu faço – você responde), imitação de sons simples, sorriso/olhar como reforço.",
-          "<strong>Alimentação (se for observar):</strong> manter semi-inclinação, pausas, atenção a fadiga e sinais de engasgo.",
-          "<strong>Dosar estímulo:</strong> manter ritmo calmo; parar ao primeiro sinal de fadiga (bocejo, soluço, desvio de olhar persistente)."
-        ];
-        foco = "Engajamento social + estímulos pré-linguísticos (e alimentação se necessário).";
-        setBadge("ok", `Resultado: ${titulo}`);
-      } else {
-        nivel = "warn";
-        titulo = "🟡 Parcialmente regulado";
-        interpretacao =
-          "Há disponibilidade parcial. O bebê pode engajar, mas tende a cansar/desorganizar com facilidade. " +
-          "Use estímulos curtos e pausas frequentes.";
-        conduta = [
-          "<strong>Comece regulando:</strong> 1–2 min de colo organizado + voz lenta.",
-          "<strong>Estímulos curtos:</strong> 10–20s de interação, pausa, repetir; sem excesso de sons/brinquedos.",
-          "<strong>Priorize qualidade:</strong> poucos minutos bem regulados valem mais que longa sessão.",
-          "<strong>Se houver fadiga:</strong> reduzir demanda e encerrar com orientação domiciliar."
-        ];
-        foco = "Regulação breve + interação curta e repetitiva (com pausas).";
-        setBadge("warn", `Resultado: ${titulo}`);
-      }
-
-      setText("reg_interpretacao", interpretacao);
-      setHTML("reg_conduta", `<ul class="small">${conduta.map(i=>`<li>${i}</li>`).join("")}</ul>`);
-      setText("reg_foco", foco);
-
-      // Texto pronto para prontuário
-      const prontuario =
-        `Checklist de regulação (0–6m): ` +
-        `Alerta="${alerta || "—"}"; Corpo="${corpo || "—"}"; Olhar="${olhar || "—"}"; ` +
-        `Voz="${voz || "—"}"; Recuperação="${recupera || "—"}". ` +
-        `Classificação: ${titulo}. ` +
-        `Conduta sugerida: ${foco}`;
-      document.getElementById("reg_resultado_salvar").value = prontuario;
-    }
-
-    // Escuta mudanças do checklist
-    const regNames = ["reg_alerta","reg_corpo","reg_olhar","reg_voz","reg_recupera"];
-    regNames.forEach(n=>{
-      document.querySelectorAll(`input[name="${n}"]`).forEach(el=>{
-        el.addEventListener("change", computeRegulation);
-      });
-    });
-
-    // --------- EXPORT / LIMPAR ---------
-    function getFormData(form){
-      const data = {};
-      const fd = new FormData(form);
-
-      for (const [key, value] of fd.entries()) {
-        if (data[key] !== undefined) {
-          if (!Array.isArray(data[key])) data[key] = [data[key]];
-          data[key].push(value);
-        } else {
-          data[key] = value;
-        }
-      }
-
-      // Arrays para checkboxes
-      ["condicoes"].forEach(k=>{
-        const els = form.querySelectorAll(`input[name="${k}"][type="checkbox"]`);
-        if (els.length){
-          const arr = [];
-          els.forEach(e=>{ if(e.checked) arr.push(e.value); });
-          data[k] = arr;
-        }
-      });
-
-      return data;
-    }
-
-    function exportJSON(){
-      const form = document.getElementById("anamForm");
-      const data = getFormData(form);
-      const pretty = JSON.stringify(data, null, 2);
-
-      const blob = new Blob([pretty], {type:"application/json"});
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      const nome = (document.getElementById("nomeBebe").value || "bebe").trim().replace(/\s+/g,"_");
-      const dataAt = document.getElementById("dataAtendimento").value || "sem_data";
-      a.href = url;
-      a.download = `anamnese_${nome}_${dataAt}.json`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    function clearForm(){
-      if(!confirm("Tem certeza que deseja limpar todas as respostas?")) return;
-      document.getElementById("anamForm").reset();
-      computeRegulation();
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
-    // Inicializa saída
-    computeRegulation();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
