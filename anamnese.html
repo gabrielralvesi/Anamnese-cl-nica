@@ -3,361 +3,838 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anamnese | Bebê (0–6m) – SD</title>
+  <title>Anamnese Completa | Bebê (0–6m) – Síndrome de Down</title>
   <style>
     :root{
-      --bg:#f7f7f8; --card:#ffffff; --text:#111827; --muted:#6b7280;
-      --line:#e5e7eb; --accent:#2C7A5A;
+      --bg:#f6f7f8; --card:#ffffff; --text:#111827; --muted:#6b7280;
+      --line:#e5e7eb; --accent:#2C7A5A; --gold:#b08934;
+      --ok:#166534; --warn:#b45309; --bad:#b91c1c;
     }
     *{box-sizing:border-box}
     body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--text)}
     header{padding:18px 16px; background:#fff; border-bottom:1px solid var(--line)}
     header h1{margin:0; font-size:18px}
     header p{margin:6px 0 0; color:var(--muted); font-size:13px}
-    main{max-width:980px; margin:18px auto; padding:0 16px 40px}
+    main{max-width:1050px; margin:18px auto; padding:0 16px 40px}
+
     .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 18px}
-    button{
+    button, .linkbtn{
       border:1px solid var(--line); background:#fff; padding:10px 12px; border-radius:10px;
-      cursor:pointer; font-weight:700; font-size:14px;
+      cursor:pointer; font-weight:800; font-size:14px; text-decoration:none; color:inherit;
     }
     button.primary{background:var(--accent); color:#fff; border-color:var(--accent)}
+    button.gold{background:rgba(176,137,52,.10); border-color:rgba(176,137,52,.25)}
+    button:hover, .linkbtn:hover{filter:brightness(.98)}
+
     .card{
       background:var(--card); border:1px solid var(--line); border-radius:14px;
-      padding:16px; margin:12px 0;
-      box-shadow:0 1px 0 rgba(0,0,0,.03);
+      padding:16px; margin:12px 0; box-shadow:0 1px 0 rgba(0,0,0,.03);
     }
     .card h2{margin:0 0 10px; font-size:16px}
+    .subttl{margin:0 0 10px; color:var(--muted); font-size:12px; line-height:1.5}
     .grid{display:grid; gap:12px}
-    @media(min-width:860px){ .grid.cols2{grid-template-columns:1fr 1fr} }
-    label{display:block; font-size:13px; font-weight:800; margin-bottom:6px}
+    @media(min-width:900px){ .grid.cols2{grid-template-columns:1fr 1fr} .grid.cols3{grid-template-columns:1fr 1fr 1fr} }
+    label{display:block; font-size:13px; font-weight:900; margin-bottom:6px}
     input, select, textarea{
       width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff;
       font-size:14px; outline:none;
     }
     textarea{min-height:90px; resize:vertical}
-    .divider{height:1px; background:var(--line); margin:12px 0}
-    .small{font-size:12px; color:var(--muted)}
     .hint{font-size:12px; color:var(--muted); margin-top:6px}
+    .divider{height:1px; background:var(--line); margin:12px 0}
+
     .chipline{display:flex; gap:10px; flex-wrap:wrap}
-    .chip{display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px; padding:8px 10px; background:#fff; font-size:13px;}
+    .chip{
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--line); border-radius:999px; padding:8px 10px; background:#fff;
+      font-size:13px;
+    }
     .chip input{width:auto}
+    .small{font-size:12px; color:var(--muted)}
+
+    .resultBox{
+      border-radius:12px; padding:12px; border:1px solid var(--line);
+      background:#fff; display:grid; gap:10px;
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 10px;
+      border-radius:999px; font-weight:900; font-size:13px; width:fit-content;
+      border:1px solid var(--line);
+    }
+    .badge.ok{color:var(--ok); border-color:rgba(22,101,52,.3); background:rgba(22,101,52,.06)}
+    .badge.warn{color:var(--warn); border-color:rgba(180,83,9,.3); background:rgba(180,83,9,.06)}
+    .badge.bad{color:var(--bad); border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.06)}
+    ul{margin:0; padding-left:18px}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size:12px; background:#f3f4f6; border:1px solid var(--line); padding:10px; border-radius:10px; overflow:auto}
+
+    details{border:1px dashed var(--line); border-radius:12px; padding:12px; background:#fcfcfd}
+    details summary{cursor:pointer; font-weight:900}
 
     @media print{
-      header,.toolbar{display:none}
+      header,.toolbar,.noPrint{display:none}
       body{background:#fff}
       .card{box-shadow:none}
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Anamnese Fono – Bebê (0–6 meses) | Síndrome de Down</h1>
-    <p>Com salvar (local), exportar JSON e imprimir/PDF.</p>
-  </header>
+<header>
+  <h1>Anamnese Completa (0–6 meses) – Síndrome de Down</h1>
+  <p>Salvar (local), Exportar JSON, Imprimir/PDF + resumo automático para prontuário + guia inicial para a família.</p>
+</header>
 
-  <main>
-    <div class="toolbar">
-      <button class="primary" type="button" onclick="saveLocal()">Salvar</button>
-      <button type="button" onclick="loadLocal()">Carregar último</button>
-      <button type="button" onclick="exportJSON()">Exportar JSON</button>
-      <button type="button" onclick="window.print()">Imprimir / Salvar em PDF</button>
-      <button type="button" onclick="clearForm()">Limpar</button>
-      <a href="adm.html" style="align-self:center; font-weight:800; color:#111; text-decoration:none; padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:#fff;">Voltar ADM</a>
-    </div>
+<main>
+  <div class="toolbar">
+    <button class="primary" type="button" onclick="saveLocal()">Salvar</button>
+    <button type="button" onclick="loadLocal()">Carregar último</button>
+    <button type="button" onclick="exportJSON()">Exportar JSON</button>
+    <button type="button" onclick="window.print()">Imprimir / Salvar em PDF</button>
+    <button type="button" onclick="clearForm()">Limpar</button>
+    <a class="linkbtn" href="adm.html">Voltar ADM</a>
+  </div>
 
-    <form id="anamForm">
-      <section class="card">
-        <h2>1) Identificação</h2>
-        <div class="grid cols2">
-          <div>
-            <label for="dataAtendimento">Data do atendimento</label>
-            <input id="dataAtendimento" name="dataAtendimento" type="date" />
-          </div>
-          <div>
-            <label for="profissional">Profissional</label>
-            <input id="profissional" name="profissional" type="text" placeholder="Gabriel Alves • CRFa 5-13766"/>
-          </div>
-          <div>
-            <label for="nomeBebe">Nome do bebê</label>
-            <input id="nomeBebe" name="nomeBebe" type="text" />
-          </div>
-          <div>
-            <label for="dataNascimento">Data de nascimento</label>
-            <input id="dataNascimento" name="dataNascimento" type="date" />
-          </div>
-          <div>
-            <label for="idadeCronologica">Idade cronológica</label>
-            <input id="idadeCronologica" name="idadeCronologica" type="text" placeholder="Ex.: 3 meses" />
-          </div>
-          <div>
-            <label for="idadeCorrigida">Idade corrigida (se prematuro)</label>
-            <input id="idadeCorrigida" name="idadeCorrigida" type="text" placeholder="Ex.: 2 meses e 1 semana" />
-          </div>
-          <div>
-            <label for="responsavel">Responsável</label>
-            <input id="responsavel" name="responsavel" type="text" placeholder="Nome e parentesco" />
-          </div>
-          <div>
-            <label for="contato">Contato</label>
-            <input id="contato" name="contato" type="text" placeholder="Telefone/WhatsApp" />
+  <form id="anamForm">
+
+    <!-- 1) IDENTIFICAÇÃO -->
+    <section class="card">
+      <h2>1) Identificação</h2>
+      <p class="subttl">Dados básicos + motivo do encaminhamento + objetivo familiar.</p>
+
+      <div class="grid cols3">
+        <div>
+          <label for="dataAtendimento">Data do atendimento</label>
+          <input id="dataAtendimento" name="dataAtendimento" type="date" />
+        </div>
+        <div>
+          <label for="profissional">Profissional</label>
+          <input id="profissional" name="profissional" type="text" placeholder="Gabriel Alves • CRFa 5-13766"/>
+        </div>
+        <div>
+          <label for="local">Local</label>
+          <input id="local" name="local" type="text" placeholder="Clínica / UBS / etc."/>
+        </div>
+      </div>
+
+      <div class="grid cols2">
+        <div>
+          <label for="nomeBebe">Nome do bebê</label>
+          <input id="nomeBebe" name="nomeBebe" type="text" />
+        </div>
+        <div>
+          <label for="dataNascimento">Data de nascimento</label>
+          <input id="dataNascimento" name="dataNascimento" type="date" />
+        </div>
+        <div>
+          <label for="idadeCronologica">Idade cronológica</label>
+          <input id="idadeCronologica" name="idadeCronologica" type="text" placeholder="Ex.: 3 meses" />
+        </div>
+        <div>
+          <label for="idadeCorrigida">Idade corrigida (se prematuro)</label>
+          <input id="idadeCorrigida" name="idadeCorrigida" type="text" placeholder="Ex.: 2 meses e 1 semana" />
+        </div>
+        <div>
+          <label for="responsavel">Responsável</label>
+          <input id="responsavel" name="responsavel" type="text" placeholder="Nome e parentesco" />
+        </div>
+        <div>
+          <label for="contato">Contato</label>
+          <input id="contato" name="contato" type="text" placeholder="Telefone/WhatsApp" />
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="grid cols2">
+        <div>
+          <label for="encaminhamento">Encaminhamento / queixa principal</label>
+          <textarea id="encaminhamento" name="encaminhamento" placeholder="Ex.: encaminhado pelo pediatra para intervenção precoce; dúvidas sobre sucção/deglutição, engasgos, estimulação."></textarea>
+        </div>
+        <div>
+          <label for="objetivoFamilia">Objetivo da família</label>
+          <textarea id="objetivoFamilia" name="objetivoFamilia" placeholder="O que mais preocupa? O que esperam da terapia?"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2) DIAGNÓSTICO / SAÚDE GERAL -->
+    <section class="card">
+      <h2>2) Diagnóstico, saúde geral e comorbidades</h2>
+      <p class="subttl">Síndrome de Down + condições comuns associadas (sem substituir acompanhamento médico).</p>
+
+      <div class="grid cols2">
+        <div>
+          <label for="diagConfirmacao">SD: como foi confirmado?</label>
+          <select id="diagConfirmacao" name="diagConfirmacao">
+            <option value="">Selecione</option>
+            <option>Cariótipo confirmado</option>
+            <option>Suspeita clínica / em investigação</option>
+            <option>Não informado</option>
+          </select>
+        </div>
+        <div>
+          <label for="seguimento">Acompanhamentos em curso</label>
+          <input id="seguimento" name="seguimento" type="text" placeholder="Pediatra / cardio / endócrino / otorrino / etc."/>
+        </div>
+      </div>
+
+      <label>Condições associadas (marque se houver)</label>
+      <div class="chipline">
+        <label class="chip"><input type="checkbox" name="cond" value="Cardiopatia" /> Cardiopatia</label>
+        <label class="chip"><input type="checkbox" name="cond" value="Hipotireoidismo/triagem" /> Tireoide/triagem</label>
+        <label class="chip"><input type="checkbox" name="cond" value="Refluxo importante" /> Refluxo importante</label>
+        <label class="chip"><input type="checkbox" name="cond" value="Otites recorrentes" /> Otites recorrentes</label>
+        <label class="chip"><input type="checkbox" name="cond" value="Apneia/roncos" /> Apneia/roncos</label>
+        <label class="chip"><input type="checkbox" name="cond" value="Uso de sonda (passado/atual)" /> Sonda (passado/atual)</label>
+        <label class="chip"><input type="checkbox" name="cond" value="Internação/UTI" /> Internação/UTI</label>
+        <label class="chip"><input type="checkbox" name="cond" value="Convulsões" /> Convulsões</label>
+      </div>
+
+      <div class="grid cols2" style="margin-top:12px">
+        <div>
+          <label for="medicacoes">Medicações em uso</label>
+          <textarea id="medicacoes" name="medicacoes" placeholder="Nome, dose, horários (se souber)."></textarea>
+        </div>
+        <div>
+          <label for="exames">Exames relevantes (datas se possível)</label>
+          <textarea id="exames" name="exames" placeholder="Eco/otorrino/audição/TSH/T4 etc."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3) GESTAÇÃO / PARTO / NEONATAL -->
+    <section class="card">
+      <h2>3) Gestação, parto e período neonatal</h2>
+      <p class="subttl">Histórico perinatal influencia sucção, tônus e organização/regulação.</p>
+
+      <div class="grid cols3">
+        <div>
+          <label for="idadeGestacional">Idade gestacional</label>
+          <input id="idadeGestacional" name="idadeGestacional" type="text" placeholder="Ex.: 38 semanas"/>
+        </div>
+        <div>
+          <label for="tipoParto">Tipo de parto</label>
+          <select id="tipoParto" name="tipoParto">
+            <option value="">Selecione</option>
+            <option>Vaginal</option>
+            <option>Cesárea</option>
+            <option>Não informado</option>
+          </select>
+        </div>
+        <div>
+          <label for="apgar">Apgar</label>
+          <input id="apgar" name="apgar" type="text" placeholder="Ex.: 8/9"/>
+        </div>
+      </div>
+
+      <div class="grid cols2">
+        <div>
+          <label for="gestacao">Gestação (intercorrências)</label>
+          <textarea id="gestacao" name="gestacao" placeholder="Infecções, hipertensão, diabetes, medicações, etc."></textarea>
+        </div>
+        <div>
+          <label for="parto">Parto/ pós-parto imediato</label>
+          <textarea id="parto" name="parto" placeholder="Necessidade de oxigênio, aspiração, dificuldades iniciais, etc."></textarea>
+        </div>
+      </div>
+
+      <div class="grid cols2">
+        <div>
+          <label for="internacao">Internação/UTI (se houve)</label>
+          <textarea id="internacao" name="internacao" placeholder="Tempo, motivo, ventilação, sonda, etc."></textarea>
+        </div>
+        <div>
+          <label for="pesoNascimento">Peso/medidas ao nascer</label>
+          <input id="pesoNascimento" name="pesoNascimento" type="text" placeholder="Peso, estatura, PC (se souber)"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4) ALIMENTAÇÃO / SUCÇÃO / DEGLUTIÇÃO -->
+    <section class="card">
+      <h2>4) Alimentação – investigação funcional</h2>
+      <p class="subttl">Objetivo: identificar fadiga, coordenação sucção-deglutição-respiração, sinais de risco e orientações iniciais.</p>
+
+      <div class="grid cols2">
+        <div>
+          <label for="tipoAlimentacao">Tipo atual</label>
+          <select id="tipoAlimentacao" name="tipoAlimentacao">
+            <option value="">Selecione</option>
+            <option>Amamentação exclusiva</option>
+            <option>Amamentação + complemento</option>
+            <option>Mamadeira exclusiva</option>
+            <option>Misto</option>
+            <option>Sonda (atual)</option>
+          </select>
+        </div>
+        <div>
+          <label for="volumeFrequencia">Volume e frequência</label>
+          <input id="volumeFrequencia" name="volumeFrequencia" type="text" placeholder="Ex.: 90 ml a cada 3h / livre demanda"/>
+        </div>
+      </div>
+
+      <div class="grid cols2">
+        <div>
+          <label for="bicoMamadeira">Se mamadeira: bico/fluxo</label>
+          <input id="bicoMamadeira" name="bicoMamadeira" type="text" placeholder="Marca / tamanho / fluxo"/>
+          <div class="hint">Bicos de fluxo alto podem aumentar engasgos; fluxo muito baixo pode aumentar fadiga.</div>
+        </div>
+        <div>
+          <label for="tempoMamada">Tempo médio da mamada</label>
+          <input id="tempoMamada" name="tempoMamada" type="text" placeholder="Ex.: 10–20 min"/>
+        </div>
+      </div>
+
+      <label>Sinais durante a alimentação (marque o que ocorre)</label>
+      <div class="chipline">
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Engasgos" /> Engasgos</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Tosse" /> Tosse</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Chiado/ruído" /> Ruído/chiado</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Choro/recusa" /> Recusa</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Fadiga/sono" /> Cansa/pega no sono</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Escape de leite" /> Escape de leite</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Ganho de peso baixo" /> Ganho de peso baixo</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Pausas longas" /> Pausas longas</label>
+        <label class="chip"><input type="checkbox" name="alim_sinais" value="Mudança de cor" /> Mudança de cor</label>
+      </div>
+
+      <div class="grid cols2" style="margin-top:12px">
+        <div>
+          <label for="posicaoAlimentar">Posição para alimentar</label>
+          <input id="posicaoAlimentar" name="posicaoAlimentar" type="text" placeholder="Ex.: semi-inclinado, no colo, etc."/>
+        </div>
+        <div>
+          <label for="pausasArrotar">Pausas/arrotar</label>
+          <input id="pausasArrotar" name="pausasArrotar" type="text" placeholder="Ex.: pausa a cada X minutos / arrota fácil/difícil"/>
+        </div>
+        <div>
+          <label for="refluxo">Refluxo/regurgitação</label>
+          <textarea id="refluxo" name="refluxo" placeholder="Frequência, se piora deitado, sinais de desconforto."></textarea>
+        </div>
+        <div>
+          <label for="observacaoAlim">Observação clínica (se observar alimentação)</label>
+          <textarea id="observacaoAlim" name="observacaoAlim" placeholder="Selamento labial, ritmo, coordenação, pausas, sinais de esforço."></textarea>
+        </div>
+      </div>
+
+      <details class="noPrint">
+        <summary>⚠️ Alertas (para você registrar quando existir)</summary>
+        <div class="small" style="margin-top:8px">
+          Marque “Mudança de cor”, “Tosse/chiado persistente”, “Ganho de peso baixo” e descreva. Se houver repetição e dúvida, orientar avaliação médica/otorrino/serviço de deglutição conforme rede local.
+        </div>
+      </details>
+    </section>
+
+    <!-- 5) RESPIRAÇÃO / SONO -->
+    <section class="card">
+      <h2>5) Respiração e sono</h2>
+      <p class="subttl">Sono e via aérea impactam alimentação, atenção e conforto.</p>
+
+      <div class="grid cols2">
+        <div>
+          <label for="respiracao">Respiração predominante</label>
+          <select id="respiracao" name="respiracao">
+            <option value="">Selecione</option>
+            <option>Nasal</option>
+            <option>Oral</option>
+            <option>Mista</option>
+            <option>Não observado</option>
+          </select>
+        </div>
+        <div>
+          <label for="congestao">Congestão / secreção frequente?</label>
+          <select id="congestao" name="congestao">
+            <option value="">Selecione</option>
+            <option>Não</option>
+            <option>Sim – às vezes</option>
+            <option>Sim – frequente</option>
+          </select>
+        </div>
+        <div>
+          <label for="sono">Sono (descrição)</label>
+          <textarea id="sono" name="sono" placeholder="Acorda muito? Dorme bem?"></textarea>
+        </div>
+        <div>
+          <label for="roncosApneia">Roncos / pausas respiratórias</label>
+          <textarea id="roncosApneia" name="roncosApneia" placeholder="Ronca? Para de respirar? Agita?"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6) AUDIÇÃO / OTITES -->
+    <section class="card">
+      <h2>6) Audição, otites e reavaliações</h2>
+      <p class="subttl">Em SD, monitoramento auditivo é essencial por risco aumentado de otite/efusão.</p>
+
+      <div class="grid cols2">
+        <div>
+          <label for="testeOrelhinha">Teste da orelhinha</label>
+          <select id="testeOrelhinha" name="testeOrelhinha">
+            <option value="">Selecione</option>
+            <option>Passou</option>
+            <option>Falhou / reteste</option>
+            <option>Ainda não</option>
+            <option>Não sabe</option>
+          </select>
+        </div>
+        <div>
+          <label for="exameAudicao">Avaliação audiológica já feita?</label>
+          <select id="exameAudicao" name="exameAudicao">
+            <option value="">Selecione</option>
+            <option>Não</option>
+            <option>Sim – normal</option>
+            <option>Sim – alteração</option>
+            <option>Agendada</option>
+          </select>
+        </div>
+        <div>
+          <label for="otites">Otites / resfriados / antibiótico</label>
+          <textarea id="otites" name="otites"></textarea>
+        </div>
+        <div>
+          <label for="respostaSom">Resposta a sons/voz em casa</label>
+          <textarea id="respostaSom" name="respostaSom" placeholder="Assusta? Acalma com voz? Procura fonte sonora?"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7) OROFACIAL / TÔNUS / POSTURA -->
+    <section class="card">
+      <h2>7) Orofacial, tônus e postura</h2>
+      <p class="subttl">Em SD, hipotonia pode impactar selamento labial, língua, sucção e marcos motores.</p>
+
+      <label>Observações (marque se presente)</label>
+      <div class="chipline">
+        <label class="chip"><input type="checkbox" name="oro" value="Hipotonia global" /> Hipotonia global</label>
+        <label class="chip"><input type="checkbox" name="oro" value="Selamento labial reduzido" /> Selamento labial reduzido</label>
+        <label class="chip"><input type="checkbox" name="oro" value="Língua anteriorizada" /> Língua anteriorizada</label>
+        <label class="chip"><input type="checkbox" name="oro" value="Baba frequente" /> Baba frequente</label>
+        <label class="chip"><input type="checkbox" name="oro" value="Preferência boca aberta" /> Boca aberta</label>
+        <label class="chip"><input type="checkbox" name="oro" value="Choro fraco" /> Choro fraco</label>
+      </div>
+
+      <div class="grid cols2" style="margin-top:12px">
+        <div>
+          <label for="postura">Postura/posicionamento</label>
+          <textarea id="postura" name="postura" placeholder="Controle de cabeça, alinhamento, tendência a extensão/flexão."></textarea>
+        </div>
+        <div>
+          <label for="observacaoOro">Observação orofacial (clínica)</label>
+          <textarea id="observacaoOro" name="observacaoOro" placeholder="Lábios, língua, bochechas, mandíbula, sucção não nutritiva."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8) REGULAÇÃO / INTERAÇÃO -->
+    <section class="card">
+      <h2>8) Regulação, engajamento e interação</h2>
+      <p class="subttl">Para bebê pequeno, o primeiro “alvo” é regulação + engajamento (olhar, turn-taking, conforto).</p>
+
+      <div class="grid cols2">
+        <div>
+          <label>Estado de alerta (hoje)</label>
+          <div class="chipline">
+            <label class="chip"><input type="radio" name="reg_alerta" value="Sono profundo"> Sono profundo</label>
+            <label class="chip"><input type="radio" name="reg_alerta" value="Sonolento"> Sonolento</label>
+            <label class="chip"><input type="radio" name="reg_alerta" value="Alerta calmo"> Alerta calmo</label>
+            <label class="chip"><input type="radio" name="reg_alerta" value="Alerta agitado"> Alerta agitado</label>
+            <label class="chip"><input type="radio" name="reg_alerta" value="Choro intenso"> Choro intenso</label>
           </div>
         </div>
-        <div class="divider"></div>
-        <div class="grid cols2">
-          <div>
-            <label for="encaminhamento">Encaminhamento / Queixa</label>
-            <textarea id="encaminhamento" name="encaminhamento"></textarea>
-          </div>
-          <div>
-            <label for="objetivoFamilia">Objetivo da família</label>
-            <textarea id="objetivoFamilia" name="objetivoFamilia"></textarea>
+
+        <div>
+          <label>Recuperação após estímulo leve</label>
+          <div class="chipline">
+            <label class="chip"><input type="radio" name="reg_recupera" value="Mantém"> Mantém organização</label>
+            <label class="chip"><input type="radio" name="reg_recupera" value="Desorganiza"> Desorganiza fácil</label>
+            <label class="chip"><input type="radio" name="reg_recupera" value="Chora rápido"> Chora rápido</label>
+            <label class="chip"><input type="radio" name="reg_recupera" value="Recupera sozinho"> Recupera sozinho</label>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="card">
-        <h2>2) Gestação, parto e neonatal</h2>
-        <div class="grid cols2">
-          <div>
-            <label for="gestacao">Gestação / intercorrências</label>
-            <textarea id="gestacao" name="gestacao"></textarea>
-          </div>
-          <div>
-            <label for="parto">Parto / intercorrências</label>
-            <textarea id="parto" name="parto"></textarea>
-          </div>
-          <div>
-            <label for="idadeGestacional">Idade gestacional</label>
-            <input id="idadeGestacional" name="idadeGestacional" type="text" placeholder="Ex.: 38 semanas" />
-          </div>
-          <div>
-            <label for="pesoNascimento">Peso ao nascer</label>
-            <input id="pesoNascimento" name="pesoNascimento" type="text" placeholder="Ex.: 2.900g" />
-          </div>
-          <div>
-            <label for="apgar">Apgar</label>
-            <input id="apgar" name="apgar" type="text" placeholder="Ex.: 8/9" />
-          </div>
-          <div>
-            <label for="internacao">Internação/UTI</label>
-            <textarea id="internacao" name="internacao"></textarea>
-          </div>
+      <div class="grid cols2" style="margin-top:12px">
+        <div>
+          <label for="reg_olhar">Olhar/face a face</label>
+          <textarea id="reg_olhar" name="reg_olhar" placeholder="Sustenta? Desvia? Procura rosto?"></textarea>
         </div>
-      </section>
-
-      <section class="card">
-        <h2>3) Alimentação (principal)</h2>
-        <div class="grid cols2">
-          <div>
-            <label for="tipoAlimentacao">Tipo atual</label>
-            <select id="tipoAlimentacao" name="tipoAlimentacao">
-              <option value="">Selecione</option>
-              <option>Amamentação exclusiva</option>
-              <option>Amamentação + complemento</option>
-              <option>Mamadeira exclusiva</option>
-              <option>Misto</option>
-              <option>Sonda (atual)</option>
-            </select>
-          </div>
-          <div>
-            <label for="bicoMamadeira">Se mamadeira: bico/fluxo</label>
-            <input id="bicoMamadeira" name="bicoMamadeira" type="text" />
-          </div>
-          <div>
-            <label for="fadigaMamada">Cansa / pausas / tempo</label>
-            <textarea id="fadigaMamada" name="fadigaMamada"></textarea>
-          </div>
-          <div>
-            <label for="sinaisAspiracao">Engasgos/tosse/alteração de cor</label>
-            <textarea id="sinaisAspiracao" name="sinaisAspiracao"></textarea>
-          </div>
-          <div>
-            <label for="refluxo">Refluxo/regurgitação</label>
-            <textarea id="refluxo" name="refluxo"></textarea>
-          </div>
-          <div>
-            <label for="posicaoMamada">Posição para alimentar</label>
-            <input id="posicaoMamada" name="posicaoMamada" type="text" />
-          </div>
+        <div>
+          <label for="reg_voz">Resposta à voz</label>
+          <textarea id="reg_voz" name="reg_voz" placeholder="Acalma? Fica atento? Não reage?"></textarea>
         </div>
-      </section>
+      </div>
 
-      <section class="card">
-        <h2>4) Respiração, sono e orofacial</h2>
-        <div class="grid cols2">
-          <div>
-            <label for="respiracao">Respiração (nasal/oral)</label>
-            <textarea id="respiracao" name="respiracao"></textarea>
-          </div>
-          <div>
-            <label for="sono">Sono/roncos/apneias</label>
-            <textarea id="sono" name="sono"></textarea>
-          </div>
-          <div>
-            <label for="babaLingua">Baba / língua projetada</label>
-            <textarea id="babaLingua" name="babaLingua"></textarea>
-          </div>
-          <div>
-            <label for="chupeta">Uso de chupeta</label>
-            <textarea id="chupeta" name="chupeta"></textarea>
-          </div>
+      <div class="divider"></div>
+
+      <div class="resultBox">
+        <div id="reg_badge" class="badge warn">Resultado: aguardando marcações</div>
+        <div>
+          <div style="font-weight:900">Interpretação</div>
+          <div id="reg_interpretacao" class="small">Marque alerta e recuperação para gerar interpretação.</div>
         </div>
-      </section>
-
-      <section class="card">
-        <h2>5) Audição</h2>
-        <div class="grid cols2">
-          <div>
-            <label for="testeOrelhinha">Teste da orelhinha</label>
-            <select id="testeOrelhinha" name="testeOrelhinha">
-              <option value="">Selecione</option>
-              <option>Passou</option>
-              <option>Falhou / reteste</option>
-              <option>Ainda não</option>
-              <option>Não sabe</option>
-            </select>
-          </div>
-          <div>
-            <label for="otites">Otites / resfriados</label>
-            <textarea id="otites" name="otites"></textarea>
-          </div>
+        <div>
+          <div style="font-weight:900">Conduta sugerida (sessão de hoje)</div>
+          <div id="reg_conduta" class="small">—</div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>6) Comunicação pré-linguística</h2>
-        <div class="grid cols2">
-          <div>
-            <label for="contatoVisual">Contato visual</label>
-            <textarea id="contatoVisual" name="contatoVisual"></textarea>
-          </div>
-          <div>
-            <label for="sorrisoSocial">Sorriso social</label>
-            <textarea id="sorrisoSocial" name="sorrisoSocial"></textarea>
-          </div>
-          <div>
-            <label for="vocalizacoes">Vocalizações</label>
-            <textarea id="vocalizacoes" name="vocalizacoes"></textarea>
-          </div>
-          <div>
-            <label for="rotinaEstimulos">Rotina de estímulos em casa</label>
-            <textarea id="rotinaEstimulos" name="rotinaEstimulos"></textarea>
-          </div>
+    <!-- 9) DESENVOLVIMENTO / MARCOS -->
+    <section class="card">
+      <h2>9) Desenvolvimento (marcos e rotina)</h2>
+      <p class="subttl">Registro de marcos atuais e rotina (para planejar intervenção precoce).</p>
+
+      <div class="grid cols2">
+        <div>
+          <label for="marcos">Marcos observados (motor e social)</label>
+          <textarea id="marcos" name="marcos" placeholder="Ex.: sustenta cabeça? sorri? acompanha com olhos?"></textarea>
         </div>
-      </section>
-
-      <section class="card">
-        <h2>7) Síntese e plano</h2>
-        <div class="grid cols2">
-          <div>
-            <label for="hipoteses">Síntese / hipóteses</label>
-            <textarea id="hipoteses" name="hipoteses"></textarea>
-          </div>
-          <div>
-            <label for="condutas">Condutas / orientações</label>
-            <textarea id="condutas" name="condutas"></textarea>
-          </div>
-          <div>
-            <label for="frequencia">Frequência sugerida</label>
-            <input id="frequencia" name="frequencia" type="text" placeholder="Ex.: 1x/semana + reavaliação" />
-          </div>
-          <div>
-            <label for="encaminhamentos">Encaminhamentos</label>
-            <input id="encaminhamentos" name="encaminhamentos" type="text" />
-          </div>
+        <div>
+          <label for="rotina">Rotina do bebê</label>
+          <textarea id="rotina" name="rotina" placeholder="Sono, mamadas, momentos de interação/brincar."></textarea>
         </div>
-        <div class="hint">Dica: após preencher, clique em **Salvar** e depois **Imprimir/PDF** se quiser anexar ao prontuário.</div>
-      </section>
+      </div>
+    </section>
 
+    <!-- 10) PLANO / OBJETIVOS -->
+    <section class="card">
+      <h2>10) Síntese, hipóteses e plano terapêutico inicial</h2>
+      <p class="subttl">Você registra sua leitura clínica e já sai com plano + orientação à família.</p>
+
+      <div class="grid cols2">
+        <div>
+          <label for="hipoteses">Síntese / hipóteses</label>
+          <textarea id="hipoteses" name="hipoteses" placeholder="Integre: alimentação, regulação, audição, tônus, interação."></textarea>
+        </div>
+        <div>
+          <label for="condutas">Condutas / orientações (clínica)</label>
+          <textarea id="condutas" name="condutas" placeholder="O que será feito em terapia + o que orientar em casa."></textarea>
+        </div>
+      </div>
+
+      <div class="grid cols3">
+        <div>
+          <label for="freq">Frequência sugerida</label>
+          <input id="freq" name="freq" type="text" placeholder="Ex.: 1x/semana + orientação domiciliar"/>
+        </div>
+        <div>
+          <label for="reavaliacao">Reavaliação</label>
+          <input id="reavaliacao" name="reavaliacao" type="text" placeholder="Ex.: em 4–6 semanas"/>
+        </div>
+        <div>
+          <label for="encaminhamentos">Encaminhamentos</label>
+          <input id="encaminhamentos" name="encaminhamentos" type="text" placeholder="Otorrino / cardio / endócrino etc."/>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMO AUTOMÁTICO -->
+    <section class="card">
+      <h2>Resumo automático para prontuário + Guia para a família</h2>
+      <p class="subttl">Clique em “Atualizar resumo” para gerar texto pronto conforme as marcações.</p>
+
+      <div class="toolbar" style="margin:0 0 10px">
+        <button class="gold" type="button" onclick="buildOutputs()">Atualizar resumo</button>
+      </div>
+
+      <label for="textoProntuario">Texto pronto para prontuário (auto)</label>
+      <textarea id="textoProntuario" name="textoProntuario" readonly></textarea>
+
+      <div class="divider"></div>
+
+      <label for="guiaFamilia">Guia inicial para a mãe/pai (auto)</label>
+      <textarea id="guiaFamilia" name="guiaFamilia" readonly></textarea>
+
+      <div class="hint">Você pode imprimir esta página e entregar o “Guia” junto, ou copiar e mandar no WhatsApp.</div>
       <p class="small">Último salvamento: <span id="lastSave">—</span></p>
-    </form>
-  </main>
+    </section>
+  </form>
+</main>
 
-  <script>
-    const KEY_LAST = "anam_sd_last";
-    const KEY_PREFIX = "anam_sd_";
+<script>
+  const KEY_LAST = "anam_sd_last_v2";
+  const KEY_PREFIX = "anam_sd_v2_";
 
-    function nowStr(){
+  function nowStr(){
+    const d = new Date();
+    const pad = n => String(n).padStart(2,"0");
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  }
+
+  function getChecked(name){
+    return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(e=>e.value);
+  }
+  function getRadio(name){
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : "";
+  }
+
+  function getFormData(){
+    const form = document.getElementById("anamForm");
+    const fd = new FormData(form);
+    const data = Object.fromEntries(fd.entries());
+    data.cond = getChecked("cond");
+    data.alim_sinais = getChecked("alim_sinais");
+    data.oro = getChecked("oro");
+    data.reg_alerta = getRadio("reg_alerta");
+    data.reg_recupera = getRadio("reg_recupera");
+    return data;
+  }
+
+  function setFormData(obj){
+    if(!obj) return;
+    Object.keys(obj).forEach(k=>{
+      const el = document.querySelector(`[name="${k}"]`);
+      if(el && el.type !== "checkbox" && el.type !== "radio") el.value = obj[k] ?? "";
+    });
+
+    // checkboxes arrays
+    (obj.cond || []).forEach(v=>{
+      const el = document.querySelector(`input[name="cond"][value="${v}"]`);
+      if(el) el.checked = true;
+    });
+    (obj.alim_sinais || []).forEach(v=>{
+      const el = document.querySelector(`input[name="alim_sinais"][value="${v}"]`);
+      if(el) el.checked = true;
+    });
+    (obj.oro || []).forEach(v=>{
+      const el = document.querySelector(`input[name="oro"][value="${v}"]`);
+      if(el) el.checked = true;
+    });
+
+    if(obj.reg_alerta){
+      const r = document.querySelector(`input[name="reg_alerta"][value="${obj.reg_alerta}"]`);
+      if(r) r.checked = true;
+    }
+    if(obj.reg_recupera){
+      const r = document.querySelector(`input[name="reg_recupera"][value="${obj.reg_recupera}"]`);
+      if(r) r.checked = true;
+    }
+
+    computeRegulation();
+  }
+
+  function buildSaveKey(data){
+    const nome = (data.nomeBebe || "sem_nome").trim().toLowerCase().replace(/\s+/g,"_");
+    const dt = (data.dataAtendimento || "sem_data");
+    return `${KEY_PREFIX}${nome}_${dt}`;
+  }
+
+  function saveLocal(){
+    const data = getFormData();
+    const saveKey = buildSaveKey(data);
+    const payload = { savedAt: nowStr(), data };
+    localStorage.setItem(saveKey, JSON.stringify(payload));
+    localStorage.setItem(KEY_LAST, saveKey);
+    document.getElementById("lastSave").textContent = payload.savedAt;
+    alert("Salvo com sucesso (neste navegador).");
+  }
+
+  function loadLocal(){
+    const lastKey = localStorage.getItem(KEY_LAST);
+    if(!lastKey){ alert("Não há salvamento anterior."); return; }
+    const raw = localStorage.getItem(lastKey);
+    if(!raw){ alert("Salvamento não encontrado."); return; }
+    const payload = JSON.parse(raw);
+
+    // limpa antes
+    document.getElementById("anamForm").reset();
+    setFormData(payload.data);
+
+    document.getElementById("lastSave").textContent = payload.savedAt || "—";
+    alert("Carregado o último salvamento.");
+  }
+
+  function exportJSON(){
+    const data = getFormData();
+    const nome = (data.nomeBebe || "bebe").trim().replace(/\s+/g,"_");
+    const dt = data.dataAtendimento || "sem_data";
+    const pretty = JSON.stringify({ exportedAt: nowStr(), data }, null, 2);
+    const blob = new Blob([pretty], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `anamnese_${nome}_${dt}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function clearForm(){
+    if(!confirm("Limpar tudo?")) return;
+    document.getElementById("anamForm").reset();
+    document.getElementById("lastSave").textContent = "—";
+    document.getElementById("textoProntuario").value = "";
+    document.getElementById("guiaFamilia").value = "";
+    computeRegulation();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  // ---------- REGULAÇÃO (simples e útil) ----------
+  function setBadge(type, text){
+    const badge = document.getElementById("reg_badge");
+    badge.className = `badge ${type}`;
+    badge.textContent = text;
+  }
+
+  function computeRegulation(){
+    const alerta = getRadio("reg_alerta");
+    const rec = getRadio("reg_recupera");
+
+    if(!alerta && !rec){
+      setBadge("warn","Resultado: aguardando marcações");
+      document.getElementById("reg_interpretacao").textContent = "Marque alerta e recuperação para gerar interpretação.";
+      document.getElementById("reg_conduta").textContent = "—";
+      return;
+    }
+
+    const redFlag = (alerta === "Choro intenso" || alerta === "Sono profundo" || rec === "Chora rápido");
+    const good = (alerta === "Alerta calmo" && (rec === "Mantém" || rec === "Recupera sozinho"));
+
+    if(redFlag){
+      setBadge("bad","🔴 Desregulado");
+      document.getElementById("reg_interpretacao").textContent =
+        "Bebê com baixa disponibilidade para aprendizagem no momento. Priorize regulação e conforto antes de qualquer demanda.";
+      document.getElementById("reg_conduta").innerHTML =
+        "<ul class='small'><li>Reduzir estímulos (luz/ruído), colo com contenção suave e alinhamento.</li><li>Voz lenta, curta, previsível; pausas.</li><li>Se persistir desconforto, encerrar orientando rotina/necessidades básicas e investigar sinais clínicos.</li></ul>";
+      return;
+    }
+
+    if(good){
+      setBadge("ok","🟢 Regulad(o/a)");
+      document.getElementById("reg_interpretacao").textContent =
+        "Bebê disponível para engajamento. É possível avançar para estímulos comunicativos e observação funcional conforme necessidade.";
+      document.getElementById("reg_conduta").innerHTML =
+        "<ul class='small'><li>Face a face, turn-taking, imitação de sons e expressões.</li><li>Estimulação curta e frequente, com pausas ao primeiro sinal de fadiga.</li></ul>";
+      return;
+    }
+
+    setBadge("warn","🟡 Parcialmente regulado");
+    document.getElementById("reg_interpretacao").textContent =
+      "Disponibilidade parcial. Trabalhe em blocos curtos com pausas frequentes e foco em qualidade do engajamento.";
+    document.getElementById("reg_conduta").innerHTML =
+      "<ul class='small'><li>1–2 min de regulação + 10–20s de interação + pausa; repetir.</li><li>Evitar excesso de brinquedos/sons ao mesmo tempo.</li></ul>";
+  }
+
+  // escuta mudanças
+  ["reg_alerta","reg_recupera"].forEach(n=>{
+    document.querySelectorAll(`input[name="${n}"]`).forEach(el=>{
+      el.addEventListener("change", computeRegulation);
+    });
+  });
+
+  // ---------- RESUMO AUTOMÁTICO + GUIA ----------
+  function buildOutputs(){
+    const d = getFormData();
+
+    // sinais de risco (alimentação)
+    const risk = [];
+    const sinais = d.alim_sinais || [];
+    if(sinais.includes("Mudança de cor")) risk.push("mudança de cor durante alimentação");
+    if(sinais.includes("Tosse")) risk.push("tosse durante alimentação");
+    if(sinais.includes("Chiado/ruído")) risk.push("ruídos/chiado durante alimentação");
+    if(sinais.includes("Ganho de peso baixo")) risk.push("ganho ponderal baixo");
+
+    const reg = d.reg_alerta ? `${d.reg_alerta} / ${d.reg_recupera || "—"}` : "não registrado";
+    const condicoes = (d.cond && d.cond.length) ? d.cond.join(", ") : "não relatadas";
+    const oro = (d.oro && d.oro.length) ? d.oro.join(", ") : "sem achados relevantes relatados";
+    const alim = d.tipoAlimentacao || "não informado";
+
+    let condutaSug = [];
+    // condutas base
+    condutaSug.push("Intervenção precoce com foco em regulação + engajamento social (olhar, turn-taking, vocalizações).");
+    condutaSug.push("Orientação familiar: rotinas de interação diária (curtas e frequentes), com pausas e sem excesso de estímulos.");
+
+    if(sinais.includes("Engasgos") || sinais.includes("Tosse") || sinais.includes("Chiado/ruído") || sinais.includes("Mudança de cor")){
+      condutaSug.push("Atenção à alimentação: ajustar posição (semi-inclinado), ritmo e pausas; registrar episódios e, se persistentes, orientar avaliação médica/otorrino conforme rede.");
+    } else {
+      condutaSug.push("Alimentação: manter observação de fadiga/pausas e sinais de desconforto; reforçar posição organizada e pausas para arrotar.");
+    }
+
+    if(d.testeOrelhinha && (d.testeOrelhinha.includes("Falhou") || d.testeOrelhinha === "Ainda não")){
+      condutaSug.push("Audição: reforçar reavaliação/retorno para triagem/audiologia (monitoramento é chave).");
+    }
+
+    // prontuário
+    const pront =
+`ANAMNESE FONOAUDIOLÓGICA (0–6m) – SD
+Data: ${d.dataAtendimento || "—"} | Bebê: ${d.nomeBebe || "—"} | Nasc: ${d.dataNascimento || "—"}
+Responsável: ${d.responsavel || "—"} | Contato: ${d.contato || "—"}
+
+Encaminhamento/queixa: ${d.encaminhamento || "—"}
+Objetivo da família: ${d.objetivoFamilia || "—"}
+
+Condições associadas: ${condicoes}
+Medicações: ${d.medicacoes || "—"}
+Exames relevantes: ${d.exames || "—"}
+
+Gestação/parto/neonatal: IG ${d.idadeGestacional || "—"} | Parto ${d.tipoParto || "—"} | Apgar ${d.apgar || "—"} | Internação/UTI: ${d.internacao || "—"}
+
+ALIMENTAÇÃO:
+Tipo: ${alim} | Volume/Frequência: ${d.volumeFrequencia || "—"} | Tempo: ${d.tempoMamada || "—"} | Bico/fluxo: ${d.bicoMamadeira || "—"}
+Sinais: ${(sinais.length ? sinais.join(", ") : "nenhum relatado")}
+Refluxo: ${d.refluxo || "—"}
+Observação clínica: ${d.observacaoAlim || "—"}
+
+Respiração: ${d.respiracao || "—"} | Congestão: ${d.congestao || "—"}
+Sono/roncos: ${d.sono || "—"} | Roncos/apneia: ${d.roncosApneia || "—"}
+
+Audição: Orelhinha=${d.testeOrelhinha || "—"} | Audiologia=${d.exameAudicao || "—"} | Otites=${d.otites || "—"}
+
+Orofacial/tônus: ${oro}
+Postura: ${d.postura || "—"}
+Observação orofacial: ${d.observacaoOro || "—"}
+
+Regulação/engajamento (sessão): ${reg}
+Olhar: ${d.reg_olhar || "—"}
+Resposta à voz: ${d.reg_voz || "—"}
+
+Marcos/rotina: ${d.marcos || "—"} | Rotina: ${d.rotina || "—"}
+
+Síntese/hipóteses: ${d.hipoteses || "—"}
+Plano/condutas: ${d.condutas || "—"}
+Frequência: ${d.freq || "—"} | Reavaliação: ${d.reavaliacao || "—"} | Encaminhamentos: ${d.encaminhamentos || "—"}
+
+Conduta sugerida (auto):
+- ${condutaSug.join("\n- ")}
+`;
+
+    // guia família
+    const guia = [];
+    guia.push("GUIA INICIAL (para casa) – 0 a 6 meses");
+    guia.push("1) Interação diária (3–5 vezes/dia, 2–3 min): face a face, voz calma, repetição, pausas.");
+    guia.push("2) Sinais de cansaço: bocejo, soluço, desvio de olhar persistente, irritação. Quando aparecer, pare e volte depois.");
+    guia.push("3) Brincadeiras simples: conversar, cantar baixinho, fazer caretas, esperar resposta (olhar/sorriso/sons).");
+    guia.push("4) Alimentação: manter posição mais organizada (semi-inclinado), fazer pausas e observar engasgos/tosse.");
+    if(risk.length){
+      guia.push(`5) Atenção: foram relatados ${risk.join(", ")}. Se isso se repetir com frequência, registre e procure orientação médica/otorrino conforme indicado.`);
+    } else {
+      guia.push("5) Se surgirem engasgos frequentes/tosse/chiado ou mudança de cor, avise imediatamente o pediatra.");
+    }
+    if(d.testeOrelhinha && (d.testeOrelhinha.includes("Falhou") || d.testeOrelhinha === "Ainda não")){
+      guia.push("6) Audição: organize o reteste/avaliação. Ouvir bem é base para a linguagem.");
+    } else {
+      guia.push("6) Audição: mantenha acompanhamento, principalmente se houver otites/resfriados frequentes.");
+    }
+    guia.push("7) Próximo passo: seguir acompanhamento fono e trazer vídeos curtos de mamada/interação se possível.");
+
+    document.getElementById("textoProntuario").value = pront.trim();
+    document.getElementById("guiaFamilia").value = guia.join("\n").trim();
+  }
+
+  // init
+  (function init(){
+    const prof = document.getElementById("profissional");
+    if(!prof.value) prof.value = "Gabriel Alves • CRFa 5-13766";
+    const dt = document.getElementById("dataAtendimento");
+    if(!dt.value){
       const d = new Date();
       const pad = n => String(n).padStart(2,"0");
-      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      dt.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
     }
-
-    function getFormData(){
-      const form = document.getElementById("anamForm");
-      const fd = new FormData(form);
-      return Object.fromEntries(fd.entries());
-    }
-
-    function setFormData(obj){
-      if(!obj) return;
-      Object.keys(obj).forEach(k=>{
-        const el = document.querySelector(`[name="${k}"]`);
-        if(el) el.value = obj[k] ?? "";
-      });
-    }
-
-    function buildSaveKey(data){
-      const nome = (data.nomeBebe || "sem_nome").trim().toLowerCase().replace(/\s+/g,"_");
-      const dt = (data.dataAtendimento || "sem_data");
-      return `${KEY_PREFIX}${nome}_${dt}`;
-    }
-
-    function saveLocal(){
-      const data = getFormData();
-      const saveKey = buildSaveKey(data);
-      const payload = { savedAt: nowStr(), data };
-      localStorage.setItem(saveKey, JSON.stringify(payload));
-      localStorage.setItem(KEY_LAST, saveKey);
-      document.getElementById("lastSave").textContent = payload.savedAt;
-      alert("Salvo com sucesso (neste navegador).");
-    }
-
-    function loadLocal(){
-      const lastKey = localStorage.getItem(KEY_LAST);
-      if(!lastKey){ alert("Não há salvamento anterior."); return; }
-      const raw = localStorage.getItem(lastKey);
-      if(!raw){ alert("Salvamento não encontrado."); return; }
-      const payload = JSON.parse(raw);
-      setFormData(payload.data);
-      document.getElementById("lastSave").textContent = payload.savedAt || "—";
-      alert("Carregado o último salvamento.");
-    }
-
-    function exportJSON(){
-      const data = getFormData();
-      const nome = (data.nomeBebe || "bebe").trim().replace(/\s+/g,"_");
-      const dt = data.dataAtendimento || "sem_data";
-      const pretty = JSON.stringify({ exportedAt: nowStr(), data }, null, 2);
-      const blob = new Blob([pretty], {type:"application/json"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `anamnese_${nome}_${dt}.json`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    function clearForm(){
-      if(!confirm("Limpar tudo?")) return;
-      document.getElementById("anamForm").reset();
-      document.getElementById("lastSave").textContent = "—";
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
-    // Auto-preenche profissional e data (se vazio)
-    (function init(){
-      const prof = document.getElementById("profissional");
-      if(!prof.value) prof.value = "Gabriel Alves • CRFa 5-13766";
-      const dt = document.getElementById("dataAtendimento");
-      if(!dt.value){
-        const d = new Date();
-        const pad = n => String(n).padStart(2,"0");
-        dt.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-      }
-    })();
-  </script>
+    computeRegulation();
+  })();
+</script>
 </body>
 </html>
