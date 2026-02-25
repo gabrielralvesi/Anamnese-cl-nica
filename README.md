@@ -1,0 +1,2 @@
+# Anamnese-cl-nica
+Anamnese
