@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anamnese | Bebê (0–6m) – SD</title>
+  <style>
+    :root{
+      --bg:#f7f7f8; --card:#ffffff; --text:#111827; --muted:#6b7280;
+      --line:#e5e7eb; --accent:#2C7A5A;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--text)}
+    header{padding:18px 16px; background:#fff; border-bottom:1px solid var(--line)}
+    header h1{margin:0; font-size:18px}
+    header p{margin:6px 0 0; color:var(--muted); font-size:13px}
+    main{max-width:980px; margin:18px auto; padding:0 16px 40px}
+    .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 18px}
+    button{
+      border:1px solid var(--line); background:#fff; padding:10px 12px; border-radius:10px;
+      cursor:pointer; font-weight:700; font-size:14px;
+    }
+    button.primary{background:var(--accent); color:#fff; border-color:var(--accent)}
+    .card{
+      background:var(--card); border:1px solid var(--line); border-radius:14px;
+      padding:16px; margin:12px 0;
+      box-shadow:0 1px 0 rgba(0,0,0,.03);
+    }
+    .card h2{margin:0 0 10px; font-size:16px}
+    .grid{display:grid; gap:12px}
+    @media(min-width:860px){ .grid.cols2{grid-template-columns:1fr 1fr} }
+    label{display:block; font-size:13px; font-weight:800; margin-bottom:6px}
+    input, select, textarea{
+      width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff;
+      font-size:14px; outline:none;
+    }
+    textarea{min-height:90px; resize:vertical}
+    .divider{height:1px; background:var(--line); margin:12px 0}
+    .small{font-size:12px; color:var(--muted)}
+    .hint{font-size:12px; color:var(--muted); margin-top:6px}
+    .chipline{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{display:flex; align-items:center; gap:8px; border:1px solid var(--line); border-radius:999px; padding:8px 10px; background:#fff; font-size:13px;}
+    .chip input{width:auto}
+
+    @media print{
+      header,.toolbar{display:none}
+      body{background:#fff}
+      .card{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Anamnese Fono – Bebê (0–6 meses) | Síndrome de Down</h1>
+    <p>Com salvar (local), exportar JSON e imprimir/PDF.</p>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <button class="primary" type="button" onclick="saveLocal()">Salvar</button>
+      <button type="button" onclick="loadLocal()">Carregar último</button>
+      <button type="button" onclick="exportJSON()">Exportar JSON</button>
+      <button type="button" onclick="window.print()">Imprimir / Salvar em PDF</button>
+      <button type="button" onclick="clearForm()">Limpar</button>
+      <a href="adm.html" style="align-self:center; font-weight:800; color:#111; text-decoration:none; padding:8px 10px; border:1px solid var(--line); border-radius:10px; background:#fff;">Voltar ADM</a>
+    </div>
+
+    <form id="anamForm">
+      <section class="card">
+        <h2>1) Identificação</h2>
+        <div class="grid cols2">
+          <div>
+            <label for="dataAtendimento">Data do atendimento</label>
+            <input id="dataAtendimento" name="dataAtendimento" type="date" />
+          </div>
+          <div>
+            <label for="profissional">Profissional</label>
+            <input id="profissional" name="profissional" type="text" placeholder="Gabriel Alves • CRFa 5-13766"/>
+          </div>
+          <div>
+            <label for="nomeBebe">Nome do bebê</label>
+            <input id="nomeBebe" name="nomeBebe" type="text" />
+          </div>
+          <div>
+            <label for="dataNascimento">Data de nascimento</label>
+            <input id="dataNascimento" name="dataNascimento" type="date" />
+          </div>
+          <div>
+            <label for="idadeCronologica">Idade cronológica</label>
+            <input id="idadeCronologica" name="idadeCronologica" type="text" placeholder="Ex.: 3 meses" />
+          </div>
+          <div>
+            <label for="idadeCorrigida">Idade corrigida (se prematuro)</label>
+            <input id="idadeCorrigida" name="idadeCorrigida" type="text" placeholder="Ex.: 2 meses e 1 semana" />
+          </div>
+          <div>
+            <label for="responsavel">Responsável</label>
+            <input id="responsavel" name="responsavel" type="text" placeholder="Nome e parentesco" />
+          </div>
+          <div>
+            <label for="contato">Contato</label>
+            <input id="contato" name="contato" type="text" placeholder="Telefone/WhatsApp" />
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="grid cols2">
+          <div>
+            <label for="encaminhamento">Encaminhamento / Queixa</label>
+            <textarea id="encaminhamento" name="encaminhamento"></textarea>
+          </div>
+          <div>
+            <label for="objetivoFamilia">Objetivo da família</label>
+            <textarea id="objetivoFamilia" name="objetivoFamilia"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2) Gestação, parto e neonatal</h2>
+        <div class="grid cols2">
+          <div>
+            <label for="gestacao">Gestação / intercorrências</label>
+            <textarea id="gestacao" name="gestacao"></textarea>
+          </div>
+          <div>
+            <label for="parto">Parto / intercorrências</label>
+            <textarea id="parto" name="parto"></textarea>
+          </div>
+          <div>
+            <label for="idadeGestacional">Idade gestacional</label>
+            <input id="idadeGestacional" name="idadeGestacional" type="text" placeholder="Ex.: 38 semanas" />
+          </div>
+          <div>
+            <label for="pesoNascimento">Peso ao nascer</label>
+            <input id="pesoNascimento" name="pesoNascimento" type="text" placeholder="Ex.: 2.900g" />
+          </div>
+          <div>
+            <label for="apgar">Apgar</label>
+            <input id="apgar" name="apgar" type="text" placeholder="Ex.: 8/9" />
+          </div>
+          <div>
+            <label for="internacao">Internação/UTI</label>
+            <textarea id="internacao" name="internacao"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3) Alimentação (principal)</h2>
+        <div class="grid cols2">
+          <div>
+            <label for="tipoAlimentacao">Tipo atual</label>
+            <select id="tipoAlimentacao" name="tipoAlimentacao">
+              <option value="">Selecione</option>
+              <option>Amamentação exclusiva</option>
+              <option>Amamentação + complemento</option>
+              <option>Mamadeira exclusiva</option>
+              <option>Misto</option>
+              <option>Sonda (atual)</option>
+            </select>
+          </div>
+          <div>
+            <label for="bicoMamadeira">Se mamadeira: bico/fluxo</label>
+            <input id="bicoMamadeira" name="bicoMamadeira" type="text" />
+          </div>
+          <div>
+            <label for="fadigaMamada">Cansa / pausas / tempo</label>
+            <textarea id="fadigaMamada" name="fadigaMamada"></textarea>
+          </div>
+          <div>
+            <label for="sinaisAspiracao">Engasgos/tosse/alteração de cor</label>
+            <textarea id="sinaisAspiracao" name="sinaisAspiracao"></textarea>
+          </div>
+          <div>
+            <label for="refluxo">Refluxo/regurgitação</label>
+            <textarea id="refluxo" name="refluxo"></textarea>
+          </div>
+          <div>
+            <label for="posicaoMamada">Posição para alimentar</label>
+            <input id="posicaoMamada" name="posicaoMamada" type="text" />
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>4) Respiração, sono e orofacial</h2>
+        <div class="grid cols2">
+          <div>
+            <label for="respiracao">Respiração (nasal/oral)</label>
+            <textarea id="respiracao" name="respiracao"></textarea>
+          </div>
+          <div>
+            <label for="sono">Sono/roncos/apneias</label>
+            <textarea id="sono" name="sono"></textarea>
+          </div>
+          <div>
+            <label for="babaLingua">Baba / língua projetada</label>
+            <textarea id="babaLingua" name="babaLingua"></textarea>
+          </div>
+          <div>
+            <label for="chupeta">Uso de chupeta</label>
+            <textarea id="chupeta" name="chupeta"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>5) Audição</h2>
+        <div class="grid cols2">
+          <div>
+            <label for="testeOrelhinha">Teste da orelhinha</label>
+            <select id="testeOrelhinha" name="testeOrelhinha">
+              <option value="">Selecione</option>
+              <option>Passou</option>
+              <option>Falhou / reteste</option>
+              <option>Ainda não</option>
+              <option>Não sabe</option>
+            </select>
+          </div>
+          <div>
+            <label for="otites">Otites / resfriados</label>
+            <textarea id="otites" name="otites"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>6) Comunicação pré-linguística</h2>
+        <div class="grid cols2">
+          <div>
+            <label for="contatoVisual">Contato visual</label>
+            <textarea id="contatoVisual" name="contatoVisual"></textarea>
+          </div>
+          <div>
+            <label for="sorrisoSocial">Sorriso social</label>
+            <textarea id="sorrisoSocial" name="sorrisoSocial"></textarea>
+          </div>
+          <div>
+            <label for="vocalizacoes">Vocalizações</label>
+            <textarea id="vocalizacoes" name="vocalizacoes"></textarea>
+          </div>
+          <div>
+            <label for="rotinaEstimulos">Rotina de estímulos em casa</label>
+            <textarea id="rotinaEstimulos" name="rotinaEstimulos"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>7) Síntese e plano</h2>
+        <div class="grid cols2">
+          <div>
+            <label for="hipoteses">Síntese / hipóteses</label>
+            <textarea id="hipoteses" name="hipoteses"></textarea>
+          </div>
+          <div>
+            <label for="condutas">Condutas / orientações</label>
+            <textarea id="condutas" name="condutas"></textarea>
+          </div>
+          <div>
+            <label for="frequencia">Frequência sugerida</label>
+            <input id="frequencia" name="frequencia" type="text" placeholder="Ex.: 1x/semana + reavaliação" />
+          </div>
+          <div>
+            <label for="encaminhamentos">Encaminhamentos</label>
+            <input id="encaminhamentos" name="encaminhamentos" type="text" />
+          </div>
+        </div>
+        <div class="hint">Dica: após preencher, clique em **Salvar** e depois **Imprimir/PDF** se quiser anexar ao prontuário.</div>
+      </section>
+
+      <p class="small">Último salvamento: <span id="lastSave">—</span></p>
+    </form>
+  </main>
+
+  <script>
+    const KEY_LAST = "anam_sd_last";
+    const KEY_PREFIX = "anam_sd_";
+
+    function nowStr(){
+      const d = new Date();
+      const pad = n => String(n).padStart(2,"0");
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+
+    function getFormData(){
+      const form = document.getElementById("anamForm");
+      const fd = new FormData(form);
+      return Object.fromEntries(fd.entries());
+    }
+
+    function setFormData(obj){
+      if(!obj) return;
+      Object.keys(obj).forEach(k=>{
+        const el = document.querySelector(`[name="${k}"]`);
+        if(el) el.value = obj[k] ?? "";
+      });
+    }
+
+    function buildSaveKey(data){
+      const nome = (data.nomeBebe || "sem_nome").trim().toLowerCase().replace(/\s+/g,"_");
+      const dt = (data.dataAtendimento || "sem_data");
+      return `${KEY_PREFIX}${nome}_${dt}`;
+    }
+
+    function saveLocal(){
+      const data = getFormData();
+      const saveKey = buildSaveKey(data);
+      const payload = { savedAt: nowStr(), data };
+      localStorage.setItem(saveKey, JSON.stringify(payload));
+      localStorage.setItem(KEY_LAST, saveKey);
+      document.getElementById("lastSave").textContent = payload.savedAt;
+      alert("Salvo com sucesso (neste navegador).");
+    }
+
+    function loadLocal(){
+      const lastKey = localStorage.getItem(KEY_LAST);
+      if(!lastKey){ alert("Não há salvamento anterior."); return; }
+      const raw = localStorage.getItem(lastKey);
+      if(!raw){ alert("Salvamento não encontrado."); return; }
+      const payload = JSON.parse(raw);
+      setFormData(payload.data);
+      document.getElementById("lastSave").textContent = payload.savedAt || "—";
+      alert("Carregado o último salvamento.");
+    }
+
+    function exportJSON(){
+      const data = getFormData();
+      const nome = (data.nomeBebe || "bebe").trim().replace(/\s+/g,"_");
+      const dt = data.dataAtendimento || "sem_data";
+      const pretty = JSON.stringify({ exportedAt: nowStr(), data }, null, 2);
+      const blob = new Blob([pretty], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `anamnese_${nome}_${dt}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function clearForm(){
+      if(!confirm("Limpar tudo?")) return;
+      document.getElementById("anamForm").reset();
+      document.getElementById("lastSave").textContent = "—";
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    // Auto-preenche profissional e data (se vazio)
+    (function init(){
+      const prof = document.getElementById("profissional");
+      if(!prof.value) prof.value = "Gabriel Alves • CRFa 5-13766";
+      const dt = document.getElementById("dataAtendimento");
+      if(!dt.value){
+        const d = new Date();
+        const pad = n => String(n).padStart(2,"0");
+        dt.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+      }
+    })();
+  </script>
+</body>
+</html>
