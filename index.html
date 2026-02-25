@@ -4,306 +4,126 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gabriel Alves | Fonoaudiologia Infantil</title>
-  <meta name="description" content="Clínica premium de fonoaudiologia infantil. Intervenção precoce, TEA, Síndrome de Down, linguagem e motricidade orofacial. CRFa 5-13766."/>
+  <meta name="description" content="Fonoaudiologia infantil premium. Intervenção precoce, TEA, Síndrome de Down, linguagem, motricidade orofacial."/>
   <meta name="theme-color" content="#0E1A1F" />
-
   <style>
     :root{
-      --bg:#070A0D;
-      --bg2:#0B1116;
-      --card:#0F1720;
-      --line:rgba(255,255,255,.08);
-      --text:#ECF2F8;
-      --muted:rgba(236,242,248,.72);
-      --gold:#D6B46C;
-      --gold2:#B48A3D;
-      --accent:#2C7A5A;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius: 18px;
+      --bg:#070A0D; --bg2:#0B1116; --line:rgba(255,255,255,.08);
+      --text:#ECF2F8; --muted:rgba(236,242,248,.72);
+      --gold:#D6B46C; --gold2:#B48A3D; --accent:#2C7A5A;
+      --shadow: 0 18px 60px rgba(0,0,0,.55); --radius: 18px;
     }
-
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", sans-serif;
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
         radial-gradient(1200px 600px at 20% 10%, rgba(214,180,108,.10), transparent 55%),
         radial-gradient(1000px 500px at 80% 10%, rgba(44,122,90,.12), transparent 55%),
         linear-gradient(180deg, var(--bg), var(--bg2));
-      color:var(--text);
-      overflow-x:hidden;
+      color:var(--text); overflow-x:hidden;
     }
-
     a{color:inherit; text-decoration:none}
     .wrap{max-width:1120px; margin:auto; padding:26px 18px 70px}
 
-    .top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      padding:10px 0 26px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px; min-width: 240px;
-    }
-    .brand img{
-      width:48px; height:48px; object-fit:contain;
-      border-radius:12px;
-      background: rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      padding:6px;
-    }
+    .top{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0 26px;}
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px;}
+    .brand img{width:48px; height:48px; object-fit:contain; border-radius:12px; background:rgba(255,255,255,.06); border:1px solid var(--line); padding:6px;}
     .brand .t1{font-weight:900; letter-spacing:.6px}
     .brand .t2{font-size:12px; color:var(--muted); margin-top:2px}
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .pill{border:1px solid var(--line); background:rgba(255,255,255,.03); padding:10px 12px; border-radius:999px; font-weight:700; font-size:13px; transition:.25s; backdrop-filter:blur(10px);}
+    .pill:hover{transform:translateY(-1px); border-color:rgba(214,180,108,.35)}
+    .pill.gold{border-color:rgba(214,180,108,.35); background:rgba(214,180,108,.10)}
 
-    .nav{
-      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
-    }
-    .pill{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding:10px 12px;
-      border-radius:999px;
-      font-weight:700;
-      font-size:13px;
-      transition:.25s;
-      backdrop-filter: blur(10px);
-    }
-    .pill:hover{transform: translateY(-1px); border-color: rgba(214,180,108,.35)}
-    .pill.gold{border-color: rgba(214,180,108,.35); background: rgba(214,180,108,.10)}
-    .pill.green{border-color: rgba(44,122,90,.35); background: rgba(44,122,90,.12)}
-
-    .hero{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-      margin-top:6px;
-    }
-    @media (max-width: 980px){
-      .hero{grid-template-columns:1fr}
-    }
+    .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:18px; align-items:stretch; margin-top:6px;}
+    @media (max-width: 980px){ .hero{grid-template-columns:1fr} }
 
     .panel{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(15,23,32,.66);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-      position:relative;
-      overflow:hidden;
+      border:1px solid var(--line); border-radius:var(--radius);
+      background:rgba(15,23,32,.66); box-shadow:var(--shadow);
+      backdrop-filter:blur(14px); position:relative; overflow:hidden;
     }
     .panel::before{
-      content:"";
-      position:absolute; inset:-2px;
+      content:""; position:absolute; inset:-2px;
       background: radial-gradient(900px 360px at 30% 10%, rgba(214,180,108,.10), transparent 55%),
                   radial-gradient(900px 360px at 80% 20%, rgba(44,122,90,.14), transparent 55%);
       pointer-events:none;
     }
     .panel > *{position:relative}
-
     .hero-left{padding:34px 26px}
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
-      border:1px solid rgba(214,180,108,.28);
-      background: rgba(214,180,108,.08);
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:900;
-      font-size:12px;
-      letter-spacing:.6px;
-      color: rgba(236,242,248,.92);
-      text-transform: uppercase;
+      border:1px solid rgba(214,180,108,.28); background:rgba(214,180,108,.08);
+      padding:8px 12px; border-radius:999px; font-weight:900; font-size:12px; letter-spacing:.6px;
+      text-transform:uppercase;
     }
-    .kdot{
-      width:8px; height:8px; border-radius:50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      box-shadow: 0 0 0 3px rgba(214,180,108,.12);
-    }
-
-    h1{
-      margin:16px 0 10px;
-      font-size:44px;
-      line-height:1.06;
-      letter-spacing:.2px;
-    }
+    .kdot{width:8px; height:8px; border-radius:50%; background:linear-gradient(135deg, var(--gold), var(--gold2)); box-shadow:0 0 0 3px rgba(214,180,108,.12);}
+    h1{margin:16px 0 10px; font-size:44px; line-height:1.06;}
     @media(max-width:480px){ h1{font-size:36px} }
+    .sub{margin:0; color:var(--muted); font-size:16px; line-height:1.6; max-width:62ch;}
 
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.6;
-      max-width: 62ch;
-    }
-
-    .cta{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:22px;
-      align-items:center;
-    }
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; align-items:center;}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:13px 16px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      font-weight:900;
-      transition:.25s;
-      box-shadow: 0 10px 28px rgba(0,0,0,.22);
+      padding:13px 16px; border-radius:14px; border:1px solid var(--line);
+      background:rgba(255,255,255,.03); font-weight:900; transition:.25s;
+      box-shadow:0 10px 28px rgba(0,0,0,.22);
     }
-    .btn:hover{transform: translateY(-1px); border-color: rgba(214,180,108,.35)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(214,180,108,.95), rgba(180,138,61,.95));
-      color:#111;
-      border-color: rgba(214,180,108,.35);
-    }
-    .btn.system{
-      background: linear-gradient(135deg, rgba(44,122,90,.95), rgba(30,95,67,.95));
-      border-color: rgba(44,122,90,.35);
-      color:#fff;
-    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(214,180,108,.35)}
+    .btn.primary{background:linear-gradient(135deg, rgba(214,180,108,.95), rgba(180,138,61,.95)); color:#111; border-color:rgba(214,180,108,.35);}
     .btn.small{padding:10px 12px; border-radius:12px; font-size:13px}
-    .ico{width:16px; height:16px; display:inline-block}
 
-    .meta{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:18px;
-      color:rgba(236,242,248,.75);
-      font-size:13px;
-    }
-    .meta .tag{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      padding:8px 10px;
-      border-radius:999px;
-    }
+    .meta{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; color:rgba(236,242,248,.75); font-size:13px;}
+    .meta .tag{border:1px solid var(--line); background:rgba(255,255,255,.02); padding:8px 10px; border-radius:999px;}
 
-    .hero-right{
-      padding:22px;
-      display:flex; flex-direction:column; gap:14px;
-    }
+    .hero-right{padding:22px; display:flex; flex-direction:column; gap:14px;}
     .logoBox{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      padding:18px;
-      background: rgba(255,255,255,.02);
-      display:flex; align-items:center; justify-content:center;
-      min-height: 180px;
-      position:relative;
-      overflow:hidden;
+      border:1px solid var(--line); border-radius:16px; padding:18px;
+      background:rgba(255,255,255,.02); display:flex; align-items:center; justify-content:center;
+      min-height:180px; position:relative; overflow:hidden;
     }
     .logoBox::after{
-      content:"";
-      position:absolute; inset:-40px;
+      content:""; position:absolute; inset:-40px;
       background: radial-gradient(240px 160px at 30% 40%, rgba(214,180,108,.12), transparent 60%),
                   radial-gradient(260px 160px at 70% 30%, rgba(44,122,90,.12), transparent 60%);
       pointer-events:none;
     }
-    .logoBox img{
-      width:min(320px, 92%);
-      height:auto;
-      filter: drop-shadow(0 18px 24px rgba(0,0,0,.35));
-      position:relative;
-    }
+    .logoBox img{width:min(320px, 92%); height:auto; filter:drop-shadow(0 18px 24px rgba(0,0,0,.35)); position:relative;}
 
-    .trust{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255,255,255,.02);
-      padding:18px;
-    }
-    .trust h3{
-      margin:0 0 10px;
-      font-size:15px;
-      letter-spacing:.2px;
-    }
+    .trust{border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.02); padding:18px;}
+    .trust h3{margin:0 0 10px; font-size:15px;}
     .trust ul{margin:0; padding-left:18px; color:var(--muted); line-height:1.7}
     .divider{height:1px; background:var(--line); margin:10px 0 0}
 
     .section{
-      margin-top:22px;
-      padding:22px;
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: rgba(15,23,32,.45);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      margin-top:22px; padding:22px; border:1px solid var(--line);
+      border-radius:var(--radius); background:rgba(15,23,32,.45);
+      backdrop-filter:blur(12px); box-shadow:0 12px 40px rgba(0,0,0,.35);
     }
-    .section h2{
-      margin:0 0 12px;
-      font-size:18px;
-      letter-spacing:.2px;
-    }
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
-    }
-    @media(max-width:980px){ .grid3{grid-template-columns:1fr} }
-
-    .card{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      border-radius: 16px;
-      padding:16px;
-    }
-    .card .title{font-weight:900; margin:0 0 8px}
-    .card p{margin:0; color:var(--muted); line-height:1.6; font-size:14px}
-
-    .list{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:10px;
-      margin-top:10px;
-    }
+    .section h2{margin:0 0 12px; font-size:18px;}
+    .list{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:10px;}
     @media(max-width:760px){ .list{grid-template-columns:1fr} }
     .item{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      border-radius: 14px;
-      padding:12px 14px;
-      color: rgba(236,242,248,.84);
-      font-weight:800;
-      font-size:14px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
+      border:1px solid var(--line); background:rgba(255,255,255,.02);
+      border-radius:14px; padding:12px 14px; font-weight:800; font-size:14px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
     }
-    .spark{
-      width:10px; height:10px; border-radius:50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold2));
-      box-shadow: 0 0 0 4px rgba(214,180,108,.10);
-      flex:0 0 auto;
-    }
+    .spark{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg, var(--gold), var(--gold2)); box-shadow:0 0 0 4px rgba(214,180,108,.10);}
 
     footer{
-      margin-top:28px;
-      border-top:1px solid var(--line);
-      padding-top:18px;
-      color: rgba(236,242,248,.62);
-      font-size:12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-top:28px; border-top:1px solid var(--line); padding-top:18px;
+      color:rgba(236,242,248,.62); font-size:12px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
 
-    .float{
-      position:fixed; right:16px; bottom:16px;
-      display:flex; flex-direction:column; gap:10px;
-      z-index: 50;
-    }
+    .float{position:fixed; right:16px; bottom:16px; display:flex; flex-direction:column; gap:10px; z-index:50;}
     .fab{
-      width:52px; height:52px; border-radius:16px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 32px rgba(0,0,0,.45);
-      display:flex; align-items:center; justify-content:center;
+      width:52px; height:52px; border-radius:16px; border:1px solid var(--line);
+      background:rgba(255,255,255,.05); backdrop-filter:blur(12px);
+      box-shadow:0 12px 32px rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center;
       transition:.2s;
     }
-    .fab:hover{transform: translateY(-2px); border-color: rgba(214,180,108,.35)}
-    .fab.primary{background: linear-gradient(135deg, rgba(44,122,90,.95), rgba(30,95,67,.95)); border-color: rgba(44,122,90,.35)}
-    .fab.gold{background: linear-gradient(135deg, rgba(214,180,108,.95), rgba(180,138,61,.95)); border-color: rgba(214,180,108,.35)}
+    .fab:hover{transform:translateY(-2px); border-color:rgba(214,180,108,.35)}
+    .fab.primary{background:linear-gradient(135deg, rgba(44,122,90,.95), rgba(30,95,67,.95)); border-color:rgba(44,122,90,.35)}
     .fab svg{width:22px; height:22px}
     .sr{position:absolute; left:-9999px}
     .anchor{scroll-margin-top:90px}
@@ -323,9 +143,7 @@
 
       <nav class="nav">
         <a class="pill" href="#especialidades">Especialidades</a>
-        <a class="pill" href="#diferenciais">Diferenciais</a>
         <a class="pill gold" href="#contato">Contato</a>
-        <a class="pill green" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener">Sistema da clínica</a>
       </nav>
     </div>
 
@@ -338,25 +156,12 @@
         <p class="sub">
           Atendimento especializado em <strong>Fonoaudiologia Infantil</strong> com foco em
           <strong>intervenção precoce</strong>, linguagem, motricidade orofacial e suporte familiar.
-          Um acompanhamento que transmite segurança, clareza e evolução mensurável.
         </p>
 
         <div class="cta">
-          <a class="btn primary" href="#contato">
-            <span class="ico">✦</span> Agendar avaliação
-          </a>
-
-          <a class="btn system" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener">
-            <span class="ico">▣</span> Sistema da clínica
-          </a>
-
-          <a class="btn small" id="btnWhats" href="#" target="_blank" rel="noopener">
-            WhatsApp
-          </a>
-
-          <a class="btn small" id="btnCall" href="#">
-            Ligar
-          </a>
+          <a class="btn primary" href="agendar.html">✦ Agendar avaliação</a>
+          <a class="btn small" id="btnWhats" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn small" id="btnCall" href="#">Ligar</a>
         </div>
 
         <div class="meta">
@@ -381,7 +186,7 @@
             <li>atendimento acolhedor e objetivo</li>
           </ul>
           <div class="divider"></div>
-          <p class="small" style="margin:10px 0 0; color:rgba(236,242,248,.68)">
+          <p style="margin:10px 0 0; color:rgba(236,242,248,.68); font-size:12px">
             Experiência premium = organização, previsibilidade e segurança para a família.
           </p>
         </div>
@@ -400,49 +205,16 @@
       </div>
     </section>
 
-    <section class="section anchor" id="diferenciais">
-      <h2>Diferenciais que passam “alto valor”</h2>
-      <div class="grid3">
-        <div class="card">
-          <div class="title">Plano terapêutico claro</div>
-          <p>Metas objetivas, acompanhamento e orientação familiar para que a evolução seja previsível e consistente.</p>
-        </div>
-        <div class="card">
-          <div class="title">Intervenção baseada em evidência</div>
-          <p>Estratégias alinhadas ao desenvolvimento infantil e aos pré-requisitos de comunicação e alimentação.</p>
-        </div>
-        <div class="card">
-          <div class="title">Ambiente acolhedor e organizado</div>
-          <p>Ritmo terapêutico bem conduzido, especialmente em bebês e crianças pequenas, respeitando regulação e engajamento.</p>
-        </div>
-      </div>
-    </section>
-
     <section class="section anchor" id="contato">
-      <h2>Contato e agendamento</h2>
-      <div class="grid3">
-        <div class="card">
-          <div class="title">WhatsApp</div>
-          <p>Clique para enviar mensagem e agendar avaliação/triagem.</p>
-          <p style="margin-top:10px">
-            <a class="btn primary" id="btnWhats2" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
-          </p>
+      <h2>Contato</h2>
+      <div class="list" style="grid-template-columns:1fr; gap:12px">
+        <div class="item">
+          <span>Agendamento (formulário rápido)</span>
+          <a class="pill gold" href="agendar.html">Abrir</a>
         </div>
-
-        <div class="card">
-          <div class="title">Telefone</div>
-          <p>Para ligação direta (confirmações / dúvidas rápidas).</p>
-          <p style="margin-top:10px">
-            <a class="btn" id="btnCall2" href="#">Ligar agora</a>
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="title">Sistema da clínica</div>
-          <p>Acesso rápido ao painel do seu sistema.</p>
-          <p style="margin-top:10px">
-            <a class="btn system" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener">Abrir Sistema da clínica</a>
-          </p>
+        <div class="item">
+          <span>WhatsApp</span>
+          <a class="pill" id="btnWhats2" href="#" target="_blank" rel="noopener">Chamar</a>
         </div>
       </div>
     </section>
@@ -454,13 +226,6 @@
   </div>
 
   <div class="float">
-    <a class="fab gold" href="https://gabrielralvesi.github.io/Clinica-Gabriel-/" target="_blank" rel="noopener" title="Sistema da clínica">
-      <span class="sr">Sistema da clínica</span>
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z" stroke="rgba(17,17,17,.95)" stroke-width="1.8" />
-      </svg>
-    </a>
-
     <a class="fab primary" id="fabWhats" href="#" target="_blank" rel="noopener" title="WhatsApp">
       <span class="sr">WhatsApp</span>
       <svg viewBox="0 0 24 24" fill="none">
@@ -471,18 +236,9 @@
   </div>
 
   <script>
-    // ✅ Seus dados (já configurados)
     const WHATS_NUMBER = "5567992318379";
-    const PHONE_NUMBER_PRETTY = "(67) 99231-8379";
     const CITY = "Amambai/MS";
-
-    const msg = encodeURIComponent(
-      "Olá, Gabriel! Gostaria de agendar uma avaliação fonoaudiológica. " +
-      "Nome da criança: ____ | Idade: ____ | Queixa principal: ____ | " +
-      "Disponibilidade de horários: ____."
-    );
-
-    const waLink = `https://wa.me/${WHATS_NUMBER}?text=${msg}`;
+    const waLink = `https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent("Olá, Gabriel! Gostaria de agendar uma avaliação fonoaudiológica.")}`;
     const telLink = `tel:${WHATS_NUMBER}`;
 
     document.getElementById("btnWhats").href = waLink;
@@ -491,9 +247,6 @@
 
     document.getElementById("btnCall").href = telLink;
     document.getElementById("btnCall").textContent = `Ligar (${CITY})`;
-
-    document.getElementById("btnCall2").href = telLink;
-    document.getElementById("btnCall2").textContent = `Ligar: ${PHONE_NUMBER_PRETTY}`;
 
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
